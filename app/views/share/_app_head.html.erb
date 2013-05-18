@@ -1,0 +1,13 @@
+<nav class="wrapper clearfix">
+	<a href="/" class='nav <%= "active" if @active_pg_head_link == 'home' %>'>
+		Home
+	</a><a href="/public/recent_articles" class='nav <%= "active" if @active_pg_head_link == 'recent_articles' %>'>
+		Recent articles
+	</a><a href="/public/what_is_hot" class='nav <%= "active" if @active_pg_head_link == 'what_is_hot' %>'>
+		What is hot?
+	</a><a href="/public/about_me" class='nav <%= "active" if @active_pg_head_link == 'about_me' %>'>
+		About me
+	</a><a class='nav swing-right <%= "active" if @active_pg_head_link == 'home' %>'>
+		Sign in
+	</a>
+</nav>
