@@ -1,6 +1,7 @@
 class PublicController < ApplicationController
 	include PostsHelper
-	include ApplicationHelper
+
+	helper :all
 
 	def home
 		@active_pg_head_link = "home"
