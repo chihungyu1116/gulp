@@ -16,7 +16,7 @@ class PublicController < ApplicationController
 
 	def posts
 		@active_pg_head_link = "posts"
-		@post_number = posts_get_newest_post_number
+		@post_number = public_get_newest_post_number
 		render 'public/posts', layout: 'application'
 	end
 end
