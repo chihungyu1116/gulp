@@ -1,6 +1,4 @@
-class PublicController < ApplicationController
-	include PostsController::PostsHelper
-	
+class PublicController < ApplicationController	
 	def home
 		@active_pg_head_link = "home"
 		render 'public/home', layout: 'application'
