@@ -1,0 +1,61 @@
+<h1 class="post-title">Remove Multiple Holes In An Array</h1>
+	<ol>
+		<li>
+			<p>Assuming we have the following setup</p>
+			<pre>
+<code lang="javascript">
+var arr=[1,2,3,4,5,6,7,8,9,10],
+    x;
+for(x = 0; x < arr.length; x++){
+  delete arr[x];
+}
+// now array contains all holes
+</code>
+		</pre>
+		</li>
+		<li>
+		<p>Solution 1: use <strong>"reduce"</strong></p>
+			<pre>
+<code lang="javascript">
+arr = arr.reduce(function(prev,cur){
+  return prev.concat(cur);
+},[]);
+</code>
+			</pre>
+		</li>
+		<li>
+			<p>Solution 2: <strong>"filter"</strong></p>
+			<pre>
+<code lang="javascript">
+arr = arr.filter(function(cur){
+  if(cur) return cur;
+});
+</code>
+			</pre>
+		</li>
+		<li>
+			<p>Solution 3: use <strong>"splice"</strong></p>
+			<pre>
+<code lang="javascript">
+for (x = arr.length; x--;) {
+  if (arr[x] === undefined) {
+    arr.splice(x, 1);
+  }
+}
+</code>
+		</pre>
+	</li>
+	<li>
+		<p>The first two solution using ECMAScript 5 specification helpers are very elegant but carry huge overhead <a href="http://jsperf.com/core-javascript-perfromance" target="_blank" class="link-external">jsperf bench mark result.</a> The third solution using the combination of normal for loop and splice is the winner in terms of performance, but <span class="t-warning">be very careful of how you write the loop.</span> Due to <strong>"splice"</strong> actually removes an element from the array on the run time, if loop is written this way.</p>
+		<pre>
+<code>
+for (x = 0; x < arr.length; x++;) {
+  if (arr[x] === undefined) {
+    arr.splice(x, 1);
+  }
+}
+</code>
+		</pre>
+		<p>The loop will prematurely exist on the half way. And you will end up with some <strong>"undefined"</strong> in the array</p>
+	</li>
+</ol>

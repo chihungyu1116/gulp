@@ -1,0 +1,8 @@
+<script>
+	(function(){
+		var is_ie8 = $('#IE8').length,
+			is_ie7 = $('#IE7').length;
+		if(is_ie8) $('body').addClass('ie8');
+		if(is_ie7) window.location.href = ""; // redirect to IE rescue page
+	}());
+</script>
