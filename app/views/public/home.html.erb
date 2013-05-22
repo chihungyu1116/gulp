@@ -1,3 +1,49 @@
 <div class="wrapper view-home">
 	<%= render partial: 'share/app_blog_title', locals: { title:'Home' }  %>
+	<% content_for :style do %>
+	<style>
+		.canvas {position:relative; margin:5px; height:500px; border:1px solid #dedede; background:#ececec; }
+		.canvas-frame { border:2px dashed #aaa;}
+		.counter-clockwise {-webkit-animation: counter-clockwise 120s infinite linear; -moz-animation: counter-clockwise 120s infinite linear; animation: counter-clockwise 120s infinite linear;}
+		.gear {position:absolute; top:50px; left:60px; width:100px; height:100px; opacity:0.8;}
+		.gear-box {position:absolute;  width:100px; height:100px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; background:gray;}
+		.gear-box-2 {-webkit-transform: rotate(30deg); -moz-transform: rotate(30deg); -ms-transform: rotate(30deg); -o-transform: rotate(30deg); transform: rotate(30deg);}
+		.gear-box-3 {-webkit-transform: rotate(60deg); -moz-transform: rotate(60deg); -ms-transform: rotate(60deg); -o-transform: rotate(60deg); transform: rotate(60deg);}
+
+
+		@-webkit-keyframes counter-clockwise {
+			from  {
+				-webkit-transform: rotate(0deg);
+			} 
+			to { 
+				-webkit-transform: rotate(-360deg);
+			}
+		}		
+		@-moz-keyframes counter-clockwise {
+			from  {
+				-moz-transform: rotate(0deg);
+			} 
+			to { 
+				-moz-transform: rotate(-360deg);
+			}
+		}	
+		@keyframes counter-clockwise {
+			from  {
+				transform: rotate(0deg);
+			} 
+			to { 
+				transform: rotate(-360deg);
+			}
+		}		
+	</style>
+	<% end %>
+	<div class="canvas-frame">
+		<div class="canvas">
+			<div class="gear counter-clockwise">
+				<div class="gear-box gear-box-1"></div>
+				<div class="gear-box gear-box-2"></div>
+				<div class="gear-box gear-box-3"></div>
+			</div>
+		</div>
+	</div>
 </div>
