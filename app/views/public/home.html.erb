@@ -2,8 +2,10 @@
 	<%= render partial: 'share/app_blog_title', locals: { title:'Home' }  %>
 	<% content_for :style do %>
 	<style>
-		.canvas {position:relative; margin:5px; height:500px; border:1px solid #dedede; background:#ececec; }
-		.canvas-frame { border:2px dashed #aaa;}
+		.view-home.wrapper {padding:5px 0; overflow-x:hidden;}
+
+		.canvas {position:relative; margin:5px; height:700px; border:1px solid #dedede; background:#ececec; }
+		.canvas-frame { min-width:900px; border:2px dashed #aaa;}
 		.counter-clockwise {-webkit-animation: counter-clockwise 90s infinite linear; -moz-animation: counter-clockwise 90s infinite linear; animation: counter-clockwise 90s infinite linear;}
 		.clockwise {-webkit-animation: clockwise 60s infinite linear; -moz-animation: clockwise 60s infinite linear; animation: clockwise 60s infinite linear;}
 		.sun {position:absolute; top:50px; left:60px; width:100px; height:100px; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; filter: alpha(opacity=80); -moz-opacity: 0.8; -webkit-opacity:0.8, -khtml-opacity: 0.8; opacity: 0.8;}
@@ -25,6 +27,38 @@
 		.sun-glass.left {margin-left:5%;}
 		.sun-glass.right {margin-right:5%;}
 		.sun-glass-bridge {width:10%; height:5px; margin-top:10px; background:#111;}
+
+		.cloude {position:absolute; font-size: 40px; width: 3.5em; height: 1.2em; background:#f6f6f6; border:1px solid #e8e8e8; border-radius: 1em; -moz-border-radius:1em; -webkit-border-radius:1em;}
+		.cloude-1,.cloude-2 {content: ''; position: absolute; background: inherit; z-index: 1;}
+		.cloude-1 {width: 1em; height: 1em; top: -0.5em; left: 0.5em; border-radius: 1em; -moz-border-radius:1em; -webkit-border-radius:1em;}
+ 		.cloude-2 {width: 1.8em; height: 1.8em; top: -0.9em; right: 0.5em; border-radius: 2em; -moz-border-radius:2em; -webkit-border-radius:2em;}
+
+ 		.cloude-pos-1 {right:80px; top:180px; animation: cloude-move-1 120s linear infinite; -moz-animation: cloude-move-1 120s linear infinite; -webkit-animation: cloude-move-1 120s linear infinite;}
+ 		.cloude-pos-2 {right:330px; top:230px; animation: cloude-move-1 270s linear infinite; -moz-animation: cloude-move-1 270s linear infinite; -webkit-animation: cloude-move-2 270s linear infinite;}
+ 		.cloude-pos-3 {right:650px; top:150px; animation: cloude-move-1 200 s linear infinite; -moz-animation: cloude-move-1 200s linear infinite; -webkit-animation: cloude-move-3 200s linear infinite;}
+ 	
+
+		@keyframes cloude-move-1{0% { right:80px; width: 3.5em;  height: 1.2em;} 90%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 91%{ right:1350px; height:0; width:0; background: transparent;} 92%{ right:-50px; height:0; width:0; background: transparent;}
+ 			93%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;}
+ 			100% {right:80px;}}
+ 		@-moz-keyframes cloude-move-1{0% { right:80px; width: 3.5em;  height: 1.2em;} 90%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 91%{ right:1350px; height:0; width:0; background: transparent;} 92%{ right:-50px; height:0; width:0; background: transparent;}
+ 			93%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;}
+ 			100% {right:80px;}}
+ 		@-webkit-keyframes cloude-move-1{0% { right:80px; width: 3.5em;  height: 1.2em;} 90%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 91%{ right:1350px; height:0; width:0; background: transparent;} 92%{ right:-50px; height:0; width:0; background: transparent;}
+ 			93%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;}
+ 			100% {right:80px;}}
+		
+ 		@keyframes cloude-move-2{ 0% {right:330px; width: 3.5em; height: 1.2em;} 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px; height:0;width:0;background: transparent;} 73%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:330px;}}
+		@-moz-keyframes cloude-move-2{ 0% {right:330px; width: 3.5em; height: 1.2em;} 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px; height:0;width:0;background: transparent;} 73%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:330px;}}
+
+		@-webkit-keyframes cloude-move-2{ 0% {right:330px; width: 3.5em; height: 1.2em;} 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px; height:0;width:0;background: transparent;} 73%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:330px;}}
+
+
+		@keyframes cloude-move-3{ 0% {right:650px; width: 3.5em; height: 1.2em; } 50%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 51%{right:1350px; height:0;width:0;background: transparent;} 52%{right:-50px;height:0;width:0;background: transparent;} 53%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:650px;}}
+		@-moz-keyframes cloude-move-3{ 0% {right:650px; width: 3.5em; height: 1.2em; } 50%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 51%{right:1350px; height:0;width:0;background: transparent;} 52%{right:-50px;height:0;width:0;background: transparent;} 53%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:650px;}}
+		@-webkit-keyframes cloude-move-3{ 0% {right:650px; width: 3.5em; height: 1.2em; } 50%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 51%{right:1350px; height:0;width:0;background: transparent;} 52%{right:-50px;height:0;width:0;background: transparent;} 53%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:650px;}}
+
+
 	</style>
 	<% end %>
 	<div class="canvas-frame">
@@ -43,6 +77,18 @@
 				<div class="sun-glasses">
 					<div class="sun-glass left col"></div><div class="sun-glass-bridge col"></div><div class="sun-glass right col"></div>
 				</div>
+			</div>
+			<div class="cloude cloude-pos-1">
+				<i class="cloude-1"></i>
+				<b class="cloude-2"></b>
+			</div>
+			<div class="cloude cloude-pos-2">
+				<i class="cloude-1"></i>
+				<b class="cloude-2"></b>
+			</div>
+			<div class="cloude cloude-pos-3">
+				<i class="cloude-1"></i>
+				<b class="cloude-2"></b>
 			</div>
 		</div>
 	</div>
