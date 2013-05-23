@@ -4,45 +4,45 @@
 	<style>
 		.canvas {position:relative; margin:5px; height:500px; border:1px solid #dedede; background:#ececec; }
 		.canvas-frame { border:2px dashed #aaa;}
-		.counter-clockwise {-webkit-animation: counter-clockwise 120s infinite linear; -moz-animation: counter-clockwise 120s infinite linear; animation: counter-clockwise 120s infinite linear;}
-		.gear {position:absolute; top:50px; left:60px; width:100px; height:100px; opacity:0.8;}
-		.gear-box {position:absolute;  width:100px; height:100px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; background:gray;}
-		.gear-box-2 {-webkit-transform: rotate(30deg); -moz-transform: rotate(30deg); -ms-transform: rotate(30deg); -o-transform: rotate(30deg); transform: rotate(30deg);}
-		.gear-box-3 {-webkit-transform: rotate(60deg); -moz-transform: rotate(60deg); -ms-transform: rotate(60deg); -o-transform: rotate(60deg); transform: rotate(60deg);}
+		.counter-clockwise {-webkit-animation: counter-clockwise 90s infinite linear; -moz-animation: counter-clockwise 90s infinite linear; animation: counter-clockwise 90s infinite linear;}
+		.clockwise {-webkit-animation: clockwise 60s infinite linear; -moz-animation: clockwise 60s infinite linear; animation: clockwise 60s infinite linear;}
+		.sun {position:absolute; top:50px; left:60px; width:100px; height:100px; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; filter: alpha(opacity=80); -moz-opacity: 0.8; -webkit-opacity:0.8, -khtml-opacity: 0.8; opacity: 0.8;}
+		.sun-face {background:#ff6700; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;}
+		.sun-ear {position:absolute;  width:100px; height:100px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; background:#ffe200;}
+		.sun-ear-2 {-webkit-transform: rotate(30deg); -moz-transform: rotate(30deg); -ms-transform: rotate(30deg); -o-transform: rotate(30deg); transform: rotate(30deg);}
+		.sun-ear-3 {-webkit-transform: rotate(60deg); -moz-transform: rotate(60deg); -ms-transform: rotate(60deg); -o-transform: rotate(60deg); transform: rotate(60deg);}
+		.sun-ear-color {background:#ffb600;}
 
+		@-webkit-keyframes counter-clockwise {from  {-webkit-transform: rotate(0deg);} to {-webkit-transform: rotate(-360deg);}}		
+		@-moz-keyframes counter-clockwise {from  {-moz-transform: rotate(0deg);} to {-moz-transform: rotate(-360deg);}}	
+		@keyframes counter-clockwise {from  {transform: rotate(0deg);} to {transform: rotate(-360deg);}}		
+		@-webkit-keyframes clockwise {from  {-webkit-transform: rotate(0deg);} to {-webkit-transform: rotate(360deg);}}	
+		@-moz-keyframes clockwise {from  {-moz-transform: rotate(0deg);} to {-moz-transform: rotate(360deg);}}	
+		@keyframes clockwise {from  {transform: rotate(0deg);} to {transform: rotate(360deg);}}	
 
-		@-webkit-keyframes counter-clockwise {
-			from  {
-				-webkit-transform: rotate(0deg);
-			} 
-			to { 
-				-webkit-transform: rotate(-360deg);
-			}
-		}		
-		@-moz-keyframes counter-clockwise {
-			from  {
-				-moz-transform: rotate(0deg);
-			} 
-			to { 
-				-moz-transform: rotate(-360deg);
-			}
-		}	
-		@keyframes counter-clockwise {
-			from  {
-				transform: rotate(0deg);
-			} 
-			to { 
-				transform: rotate(-360deg);
-			}
-		}		
+		.sun-glasses {height:50px; margin-top:25px;}
+		.sun-glass {width:40%; height:25px; background:#1b1b1b; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;}
+		.sun-glass.left {margin-left:5%;}
+		.sun-glass.right {margin-right:5%;}
+		.sun-glass-bridge {width:10%; height:5px; margin-top:10px; background:#111;}
 	</style>
 	<% end %>
 	<div class="canvas-frame">
 		<div class="canvas">
-			<div class="gear counter-clockwise">
-				<div class="gear-box gear-box-1"></div>
-				<div class="gear-box gear-box-2"></div>
-				<div class="gear-box gear-box-3"></div>
+			<div class="sun counter-clockwise">
+				<div class="sun-ear"></div>
+				<div class="sun-ear sun-ear-2"></div>
+				<div class="sun-ear sun-ear-3"></div>
+			</div>
+			<div class="sun clockwise">
+				<div class="sun-ear sun-ear-color"></div>
+				<div class="sun-ear sun-ear-color sun-ear-2"></div>
+				<div class="sun-ear sun-ear-color sun-ear-3"></div>
+			</div>
+			<div class="sun sun-face">
+				<div class="sun-glasses">
+					<div class="sun-glass left col"></div><div class="sun-glass-bridge col"></div><div class="sun-glass right col"></div>
+				</div>
 			</div>
 		</div>
 	</div>
