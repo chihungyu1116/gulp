@@ -1,13 +1,16 @@
 <div class="wrapper view-home">
 	<%= render partial: 'share/app_blog_title', locals: { title:'Home' }  %>
+	<% content_for :links do %>
+		<link href='http://fonts.googleapis.com/css?family=Finger+Paint' rel='stylesheet' type='text/css'>
+	<% end %>
 	<% content_for :style do %>
 	<style>
 		.view-home.wrapper {padding:5px 0; overflow-x:hidden;}
 
-		.canvas {min-width:1000px; overflow:hidden; position:relative; height:700px; background:#2299cc; border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;}
+		.canvas {min-width:1000px; overflow:hidden; position:relative; height:700px; background:#2299cc;}
 		.counter-clockwise {-webkit-animation: counter-clockwise 90s infinite linear; -moz-animation: counter-clockwise 90s infinite linear; animation: counter-clockwise 90s infinite linear;}
 		.clockwise {-webkit-animation: clockwise 60s infinite linear; -moz-animation: clockwise 60s infinite linear; animation: clockwise 60s infinite linear;}
-		.sun {position:absolute; top:50px; left:60px; width:100px; height:100px; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; filter: alpha(opacity=80); -moz-opacity: 0.8; -webkit-opacity:0.8, -khtml-opacity: 0.8; opacity: 0.8;}
+		.sun {position:absolute; top:50px; left:60px; width:100px; height:100px; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; filter: alpha(opacity=80); -moz-opacity: 0.8; -webkit-opacity:0.8; -khtml-opacity: 0.8; opacity: 0.8;}
 		.sun-face {background:#ff6700; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;}
 		.sun-ear {position:absolute;  width:100px; height:100px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; background:#ffe200;}
 		.sun-ear-2 {-webkit-transform: rotate(30deg); -moz-transform: rotate(30deg); -ms-transform: rotate(30deg); -o-transform: rotate(30deg); transform: rotate(30deg);}
@@ -29,8 +32,6 @@
 		@keyframes blink { 0% {transform:scaleY(1);} 48% {transform:scaleY(1) rotateX(0deg);} 50% {transform:scaleY(0.1) rotateX(360deg);} 52% {transform:scaleY(1) rotateX(0deg);} 100% {transform:scaleY(1);}}
 		@-moz-keyframes blink { 0% {-moz-transform:scaleY(1);} 48% {-moz-transform:scaleY(1) rotateX(0deg);} 50% {-moz-transform:scaleY(0.1) rotateX(360deg);} 52% {-moz-transform:scaleY(1) rotateX(0deg);} 100% {-moz-transform:scaleY(1);}}
 		@-webkit-keyframes blink { 0% {-webkit-transform:scaleY(1);} 48% {-webkit-transform:scaleY(1) rotateX(0deg);} 50% {-webkit-transform:scaleY(0.1) rotateX(360deg);} 52% {-webkit-transform:scaleY(1) rotateX(0deg);} 100% {-webkit-transform:scaleY(1);}}
-
-
 
 		.cloude {position:absolute; font-size: 40px; width: 3.5em; height: 1.2em; background:#f6f6f6; border:1px solid #e8e8e8; border-radius: 1em; -moz-border-radius:1em; -webkit-border-radius:1em;}
 		.cloude-1,.cloude-2 {content: ''; position: absolute; background: inherit; z-index: 1;}
@@ -64,8 +65,8 @@
 		@-webkit-keyframes cloude-move-6{ 0% {right:230px; width: 3.5em; height: 1.2em; } 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px;height:0;width:0;background: transparent;} 73%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:230px;}}
 
 		.mountain {position:absolute; bottom:-240px; right:-50px; border: 1px solid #339144; width:400px; height:400px; background:#339944; border-radius:65px; -moz-border-radius:65px; -webkit-border-radius:65px; transform:rotate(45deg); -moz-transform:rotate(45deg); -webkit-transform:rotate(45deg);}
-		.mountain.mountain-1 {bottom:-300px; right:200px; width:500px; height:500px;}
-		.mountain.mountain-2 {bottom:-200px; right:450px; width:350px; height:350px;}
+		.mountain.mountain-1 {bottom:-350px; right:180px; width:600px; height:600px;}
+		.mountain.mountain-2 {bottom:-300px; right:450px; width:500px; height:500px;}
 		.mountain.mountain-3 {bottom:-260px; right:700px; width:450px; height:450px;}
 
 		.plane {position:absolute; top:320px; right:20px; width:100px; height:35px; transform:rotateX(20deg);  -moz-transform:rotateX(20deg);  -webkit-transform:rotateX(20deg); animation:flying 50s ease infinite; -moz-animation:flying 50s ease infinite; -webkit-animation:flying 50s ease infinite;}
@@ -87,9 +88,46 @@
 		@-moz-keyframes flying { 0% {right:20px; width: 100px; height:35px; } 95%{right:1300px; width:100px; height:35px; z-index:2;} 96%{right:1350px; height:0;width:0; z-index:-1;} 97%{right:-50px;height:0;width:0; z-index:-1;} 98%{right:-50px;width:100px; height:35px; z-index:2;} 100% {right:20px;}}
 		@-webkit-keyframes flying { 0% {right:20px; width: 100px; height:35px; } 95%{right:1300px; width:100px; height:35px; z-index:2;} 96%{right:1350px; height:0;width:0; z-index:-1;} 97%{right:-50px;height:0;width:0; z-index:-1;} 98%{right:-50px;width:100px; height:35px; z-index:2;} 100% {right:20px;}}
 
+		.plane-smoke {position: absolute; background: #f2f2f2; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; filter: alpha(opacity=80); -moz-opacity: 0.8; -webkit-opacity:0.8; -khtml-opacity: 0.8; opacity: 0.8; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; animation:smoke 1s linear infinite; -moz-animation:smoke 1s linear infinite; -webkit-animation:smoke 1s linear infinite;}
+		.plane-smoke-1 {top:9px; right:-20px; width: 3px; height: 3px;}
+		.plane-smoke-2 {top:8px; right:-40px; width:5px; height:5px; animation-delay:0.33s; -moz-animation-delay:0.33s; -webkit-animation-delay:0.33s;}
+		.plane-smoke-3 {top:7px; right:-60px; width:7px; height:7px; animation-delay:0.33s; -moz-animation-delay:0.33s; -webkit-animation-delay:0.66s;}
+
+		@keyframes smoke {0%{-ms-filter: opacity:0.8;}66% {opacity:0;}100%{opacity:0;}}
+		@-moz-keyframes smoke {0%{-ms-filter: -moz-opacity:0.8;}66% {-moz-opacity:0;}100%{-moz-opacity:0;}}
+		@-webkit-keyframes smoke {0%{-ms-filter: -webkit-opacity:0.8;}66% {-webkit-opacity:0;}100%{-webkit-opacity:0;}}
+
+		.banner {position:absolute; z-index:6; bottom:50px; left:100px; margin:0; font-family:'Finger Paint', cursive; font-weight:bold; font-size:70px; color:#eee; text-shadow:1px 1px 3px rgba(0,0,0,0.75);}
+		.card {position:absolute; right:40px; bottom:40px; z-index:11; width:350px; height:225px;}
+		.card-bg {position:absolute; z-index:1; width:100%; height:100%; background:#f2f2f2; box-shadow:0 0 3px rgba(0,0,0,0.25); -moz-box-shadow:0 0 3px rgba(0,0,0,0.25); -webkit-box-shadow:0 0 3px rgba(0,0,0,0.25); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; filter: alpha(opacity=50); -moz-opacity: 0.5; -webkit-opacity:0.5; -khtml-opacity: 0.5; opacity: 0.5; border-radius:10px; border-radius:10px; border-radius:10px;}
+		.card-body {position:absolute; z-index:2; width:100%; height:100%; padding:10px;}
+		.card-icon-holder {text-align:center; width:80px; height:80px; border:2px solid #1f5d8e; margin-right:10px; background:#fff; border-radius:3px; -moz-border-radius:3px; -webkit-border-radius:3px;}
+		.card-icon {width:60px; padding:9px 0;}
+		.card-head {padding:6px 0 5px; line-height:23px;}
+
+		.card-title {text-decoration:underline; color:#060606;}
+		.card-desc {height:110px; padding:10px; margin-top:15px; font-size:12px; line-height:18px; color:#cecece; background:#2b2b2b; border-radius:3px; -moz-border-radius:3px; -webkit-border-radius:3px;}
+		.card-signature {text-align:right; padding:20px 10px 0 0; font-family:cursive; font-size:14px; color:#f05;}
 	</style>
 	<% end %>
 	<div class="canvas">
+		<div class="card">
+			<div class="card-bg"></div>
+			<div class="card-body">
+				<div class="card-icon-holder col">
+					<img class="card-icon" src="/assets/icons/card_icon.png">
+				</div><div class="col card-head">
+					Title:&nbsp;&nbsp;<i class="card-title">Frontend Developer</i><br/>
+					Work At:&nbsp;&nbsp;<i class="card-title">Spokeo</i><br/>
+					School:&nbsp;&nbsp;<i class="card-title">UCLA (Computer Science)</i>
+				</div>
+				<div class="card-desc">
+					Proficient in:&nbsp;&nbsp;&nbsp;Ruby on Rails, Javascript, CSS, HTML.<br/>
+					Expertise in:&nbsp;&nbsp;&nbsp;Building full Ajaxified client side web application. Hand coding cross-browser clean & organized CSS and HTML.<br/>
+					<div class="card-signature">Chihung Yu</div>
+				</div>
+			</div>
+		</div>
 		<div class="sun counter-clockwise">
 			<div class="sun-ear"></div>
 			<div class="sun-ear sun-ear-2"></div>
@@ -138,7 +176,11 @@
 		<div class="plane">
 			<div class="plane-head"></div>
 			<div class="plane-body"></div>
-			<div class="plane-tail"></div>
+			<div class="plane-tail">
+				<div class="plane-smoke plane-smoke-1"></div>
+				<div class="plane-smoke plane-smoke-2"></div>
+				<div class="plane-smoke plane-smoke-3"></div>
+			</div>
 			<div class="plane-wing-right"></div>
 			<div class="plane-wing-left"></div>
 			<div class="plane-window"></div>
@@ -149,6 +191,11 @@
 			<div class="plane-window plane-window-5"></div>
 			<div class="plane-window plane-window-6"></div>
 			<div class="plane-window plane-window-7"></div>
+
 		</div>
+		<h1 class="banner">
+			I JUST<br/>
+			&nbsp;DO IT
+		</h1>
 	</div>
 </div>
