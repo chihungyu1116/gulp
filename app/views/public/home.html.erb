@@ -97,18 +97,64 @@
 		@-moz-keyframes smoke {0%{-ms-filter: -moz-opacity:0.8;}66% {-moz-opacity:0;}100%{-moz-opacity:0;}}
 		@-webkit-keyframes smoke {0%{-ms-filter: -webkit-opacity:0.8;}66% {-webkit-opacity:0;}100%{-webkit-opacity:0;}}
 
-		.banner {position:absolute; z-index:6; bottom:50px; left:100px; margin:0; font-family:'Finger Paint', cursive; font-weight:bold; font-size:70px; color:#eee; text-shadow:1px 1px 3px rgba(0,0,0,0.75);}
-		.card {position:absolute; right:40px; bottom:40px; z-index:11; width:350px; height:225px;}
+		.banner {position:absolute; z-index:6; bottom:40px; right:40px; margin:0; font-family:'Finger Paint', cursive; font-size:50px; color:#eee; text-shadow:1px 1px 3px rgba(0,0,0,0.75);}
+		.card {position:absolute; left:40px; bottom:40px; z-index:11; width:350px; height:225px; animation:card-flip 30s linear infinite; -moz-animation:card-flip 30s linear infinite; -webkit-animation:card-flip 30s linear infinite;}
 		.card-bg {position:absolute; z-index:1; width:100%; height:100%; background:#f2f2f2; box-shadow:0 0 3px rgba(0,0,0,0.25); -moz-box-shadow:0 0 3px rgba(0,0,0,0.25); -webkit-box-shadow:0 0 3px rgba(0,0,0,0.25); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; filter: alpha(opacity=50); -moz-opacity: 0.5; -webkit-opacity:0.5; -khtml-opacity: 0.5; opacity: 0.5; border-radius:10px; border-radius:10px; border-radius:10px;}
 		.card-body {position:absolute; z-index:2; width:100%; height:100%; padding:10px;}
 		.card-icon-holder {text-align:center; width:80px; height:80px; border:2px solid #1f5d8e; margin-right:10px; background:#fff; border-radius:3px; -moz-border-radius:3px; -webkit-border-radius:3px;}
-		.card-icon {width:60px; padding:9px 0;}
+		.card-icon {width:60px; padding:9px 0; animation: icon_shake 10s linear infinite; -moz-animation: icon_shake 10s linear infinite; -webkit-animation: icon_shake 10s linear infinite;}
 		.card-head {padding:6px 0 5px; line-height:23px;}
 
 		.card-title {text-decoration:underline; color:#060606;}
 		.card-desc {height:110px; padding:10px; margin-top:15px; font-size:12px; line-height:18px; color:#cecece; background:#2b2b2b; border-radius:3px; -moz-border-radius:3px; -webkit-border-radius:3px;}
 		.card-signature {text-align:right; padding:20px 10px 0 0; font-family:cursive; font-size:14px; color:#f05;}
+
+		@keyframes card-flip {0% {transform: rotateY(0deg);} 48% {transform: rotateY(0deg);} 52% {transform: rotateY(360deg);} 100% {transform: rotateY(360deg);}}
+		@-moz-keyframes card-flip {0% {-moz-transform: rotateY(0deg);} 48% {-moz-transform: rotateY(0deg);} 52% {-moz-transform: rotateY(360deg);} 100% {-moz-transform: rotateY(360deg);}}
+		@-webkit-keyframes card-flip {0% {-webkit-transform: rotateY(0deg);} 48% {-webkit-transform: rotateY(0deg);} 52% {-webkit-transform: rotateY(360deg);} 100% {-webkit-transform: rotateY(360deg);}}
+		@keyframes icon_shake {0%{transform:rotate(0deg);} 25%{transform:rotate(-30deg);} 50%{transform:rotate(0deg);} 75%{transform:rotate(30deg);} 100%{transform:rotate(30deg);}}
+		@-moz-keyframes icon_shake {0%{-moz-transform:rotate(0deg);} 25%{-moz-transform:rotate(-30deg);} 50%{-moz-transform:rotate(0deg);} 75%{-moz-transform:rotate(30deg);} 100%{-moz-transform:rotate(30deg);}}
+		@-webkit-keyframes icon_shake {0%{-webkit-transform:rotate(0deg);} 25%{-webkit-transform:rotate(-30deg);} 50%{-webkit-transform:rotate(0deg);} 75%{-webkit-transform:rotate(30deg);} 100%{-webkit-transform:rotate(0deg);}}
+
+
+		.categories {position:relative; overflow:hidden; min-width:1000px; margin-top:120px;}
+		.category-ball {position:absolute; top:-50px; width:600px; height:600px; font-family:'Finger Paint', cursive; color:#ff0000; font-size:50px;  border-radius:50%; border-radius:50%; border-radius:50%;}
+		.category-ball-1 {top:-50px; left:-200px; z-index:3; padding:150px 0 0 220px; background:#fff;}
+		.category-ball-2 {left:-160px; z-index:2; border:5px solid #fff; padding:0; -webkit-transition:background 0.6s ease 0.2s; background:#3f4169}
+		.category-ball-2.js-link {background:#e5676e;}
+		.category-ball-2.ror-link {background:#b2e4e9;}
+		.category-ball-2.css-link {background:#9a021d;}
+		.category {text-align:right; height:85px; padding-right:40px; font-size:30px; line-height:80px; border-bottom:5px solid #fff; }
+		.category-link {color:#fff; font-weight:bold; text-shadow:0 0 3px rgba(0,0,0,0.5);}
+		.category-link:hover {text-decoration:underline; text-shadow:0 0 3px rgba(0,0,0,0.9);}
+		.category-1 {background:#e5676e;}
+		.category-2 {background:#b2e4e9;}
+		.category-3 {background:#9a021d;}
+		.category-4 {background:#efb487;}
+		.category-5 {background:#e5bf4c; border:0;}
 	</style>
+	<% end %>
+	<% content_for :script do %>
+	<script>
+		$(document).ready(function(){
+			var ball = $('#category-ball');
+			$('#js-link').hover(function(){
+				ball.addClass('js-link');
+			},function(){
+				ball.removeClass('js-link');
+			});
+			$('#ror-link').hover(function(){
+				ball.addClass('ror-link');
+			},function(){
+				ball.removeClass('ror-link');
+			});
+			$('#css-link').hover(function(){
+				ball.addClass('css-link');
+			},function(){
+				ball.removeClass('css-link');
+			});
+		});
+	</script>
 	<% end %>
 	<div class="canvas">
 		<div class="card">
@@ -195,7 +241,19 @@
 		</div>
 		<h1 class="banner">
 			I JUST<br/>
-			&nbsp;DO IT
+			&nbsp;&nbsp;DO IT
 		</h1>
+	</div>
+	<div class="categories">
+		<div class="category-ball category-ball-1">
+			Table of<br/>
+			&nbsp;&nbsp;&nbsp;Content
+		</div>
+		<div id="category-ball" class="category-ball category-ball-2"></div>
+		<div id="js-link" class="category category-1"><a class="category-link">Javascript</a></div>
+		<div id="ror-link" class="category category-2"><a class="category-link">Ruby on Rails</a></div>
+		<div id="css-link" class="category category-3"><a class="category-link">CSS & HTML</a></div>
+		<div class="category category-4"></div>
+		<div class="category category-5"></div>
 	</div>
 </div>
