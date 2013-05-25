@@ -4,8 +4,7 @@
 	<style>
 		.view-home.wrapper {padding:5px 0; overflow-x:hidden;}
 
-		.canvas {position:relative; margin:5px; height:700px; border:1px solid #dedede; background:#ececec; }
-		.canvas-frame { min-width:900px; border:2px dashed #aaa;}
+		.canvas {min-width:1000px; overflow:hidden; position:relative; height:700px; background:#2299cc; border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;}
 		.counter-clockwise {-webkit-animation: counter-clockwise 90s infinite linear; -moz-animation: counter-clockwise 90s infinite linear; animation: counter-clockwise 90s infinite linear;}
 		.clockwise {-webkit-animation: clockwise 60s infinite linear; -moz-animation: clockwise 60s infinite linear; animation: clockwise 60s infinite linear;}
 		.sun {position:absolute; top:50px; left:60px; width:100px; height:100px; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; filter: alpha(opacity=80); -moz-opacity: 0.8; -webkit-opacity:0.8, -khtml-opacity: 0.8; opacity: 0.8;}
@@ -14,82 +13,142 @@
 		.sun-ear-2 {-webkit-transform: rotate(30deg); -moz-transform: rotate(30deg); -ms-transform: rotate(30deg); -o-transform: rotate(30deg); transform: rotate(30deg);}
 		.sun-ear-3 {-webkit-transform: rotate(60deg); -moz-transform: rotate(60deg); -ms-transform: rotate(60deg); -o-transform: rotate(60deg); transform: rotate(60deg);}
 		.sun-ear-color {background:#ffb600;}
-
-		@-webkit-keyframes counter-clockwise {from  {-webkit-transform: rotate(0deg);} to {-webkit-transform: rotate(-360deg);}}		
 		@-moz-keyframes counter-clockwise {from  {-moz-transform: rotate(0deg);} to {-moz-transform: rotate(-360deg);}}	
 		@keyframes counter-clockwise {from  {transform: rotate(0deg);} to {transform: rotate(-360deg);}}		
-		@-webkit-keyframes clockwise {from  {-webkit-transform: rotate(0deg);} to {-webkit-transform: rotate(360deg);}}	
-		@-moz-keyframes clockwise {from  {-moz-transform: rotate(0deg);} to {-moz-transform: rotate(360deg);}}	
+		@-webkit-keyframes counter-clockwise {from  {-webkit-transform: rotate(0deg);} to {-webkit-transform: rotate(-360deg);}}		
 		@keyframes clockwise {from  {transform: rotate(0deg);} to {transform: rotate(360deg);}}	
+		@-moz-keyframes clockwise {from  {-moz-transform: rotate(0deg);} to {-moz-transform: rotate(360deg);}}	
+		@-webkit-keyframes clockwise {from  {-webkit-transform: rotate(0deg);} to {-webkit-transform: rotate(360deg);}}	
 
 		.sun-glasses {height:50px; margin-top:25px;}
-		.sun-glass {width:40%; height:25px; background:#1b1b1b; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%;}
+		.sun-glass {width:40%; height:25px; background:#1b1b1b; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; animation: blink 15s ease infinite; -moz-animation: blink 15s ease infinite; -webkit-animation: blink 15s ease infinite;}
 		.sun-glass.left {margin-left:5%;}
 		.sun-glass.right {margin-right:5%;}
 		.sun-glass-bridge {width:10%; height:5px; margin-top:10px; background:#111;}
+
+		@keyframes blink { 0% {transform:scaleY(1);} 48% {transform:scaleY(1) rotateX(0deg);} 50% {transform:scaleY(0.1) rotateX(360deg);} 52% {transform:scaleY(1) rotateX(0deg);} 100% {transform:scaleY(1);}}
+		@-moz-keyframes blink { 0% {-moz-transform:scaleY(1);} 48% {-moz-transform:scaleY(1) rotateX(0deg);} 50% {-moz-transform:scaleY(0.1) rotateX(360deg);} 52% {-moz-transform:scaleY(1) rotateX(0deg);} 100% {-moz-transform:scaleY(1);}}
+		@-webkit-keyframes blink { 0% {-webkit-transform:scaleY(1);} 48% {-webkit-transform:scaleY(1) rotateX(0deg);} 50% {-webkit-transform:scaleY(0.1) rotateX(360deg);} 52% {-webkit-transform:scaleY(1) rotateX(0deg);} 100% {-webkit-transform:scaleY(1);}}
+
+
 
 		.cloude {position:absolute; font-size: 40px; width: 3.5em; height: 1.2em; background:#f6f6f6; border:1px solid #e8e8e8; border-radius: 1em; -moz-border-radius:1em; -webkit-border-radius:1em;}
 		.cloude-1,.cloude-2 {content: ''; position: absolute; background: inherit; z-index: 1;}
 		.cloude-1 {width: 1em; height: 1em; top: -0.5em; left: 0.5em; border-radius: 1em; -moz-border-radius:1em; -webkit-border-radius:1em;}
  		.cloude-2 {width: 1.8em; height: 1.8em; top: -0.9em; right: 0.5em; border-radius: 2em; -moz-border-radius:2em; -webkit-border-radius:2em;}
 
- 		.cloude-pos-1 {right:80px; top:180px; animation: cloude-move-1 120s linear infinite; -moz-animation: cloude-move-1 120s linear infinite; -webkit-animation: cloude-move-1 120s linear infinite;}
- 		.cloude-pos-2 {right:330px; top:230px; animation: cloude-move-1 270s linear infinite; -moz-animation: cloude-move-1 270s linear infinite; -webkit-animation: cloude-move-2 270s linear infinite;}
- 		.cloude-pos-3 {right:650px; top:150px; animation: cloude-move-1 200 s linear infinite; -moz-animation: cloude-move-1 200s linear infinite; -webkit-animation: cloude-move-3 200s linear infinite;}
- 	
+ 		.cloude-pos-1 {right:80px; top:180px; animation: cloude-move-1 280s linear infinite; -moz-animation: cloude-move-1 280s linear infinite; -webkit-animation: cloude-move-1 280s linear infinite;}
+ 		.cloude-pos-2 {right:330px; top:220px; animation: cloude-move-2 185s linear infinite; -moz-animation: cloude-move-2 185s linear infinite; -webkit-animation: cloude-move-2 185s linear infinite;}
+ 		.cloude-pos-3 {right:650px; top:130px; animation: cloude-move-3 125s linear infinite; -moz-animation: cloude-move-3 125s linear infinite; -webkit-animation: cloude-move-3 125s linear infinite;}
+ 		.cloude-pos-4 {right:450px; top:110px; animation: cloude-move-4 165s linear infinite; -moz-animation: cloude-move-4 165s linear infinite; -webkit-animation: cloude-move-4 165s linear infinite;}
+ 		.cloude-pos-5 {right:790px; top:200px; animation: cloude-move-5 100s linear infinite; -moz-animation: cloude-move-5 100s linear infinite; -webkit-animation: cloude-move-5 100s linear infinite;}
+ 		.cloude-pos-6 {right:230px; top:150px; animation: cloude-move-6 135s linear infinite; -moz-animation: cloude-move-6 135s linear infinite; -webkit-animation: cloude-move-6 135s linear infinite;}
 
-		@keyframes cloude-move-1{0% { right:80px; width: 3.5em;  height: 1.2em;} 90%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 91%{ right:1350px; height:0; width:0; background: transparent;} 92%{ right:-50px; height:0; width:0; background: transparent;}
- 			93%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;}
- 			100% {right:80px;}}
- 		@-moz-keyframes cloude-move-1{0% { right:80px; width: 3.5em;  height: 1.2em;} 90%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 91%{ right:1350px; height:0; width:0; background: transparent;} 92%{ right:-50px; height:0; width:0; background: transparent;}
- 			93%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;}
- 			100% {right:80px;}}
- 		@-webkit-keyframes cloude-move-1{0% { right:80px; width: 3.5em;  height: 1.2em;} 90%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 91%{ right:1350px; height:0; width:0; background: transparent;} 92%{ right:-50px; height:0; width:0; background: transparent;}
- 			93%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;}
- 			100% {right:80px;}}
-		
+		@keyframes cloude-move-1{0% { right:80px; width: 3.5em;  height: 1.2em;} 90%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 91%{ right:1350px; height:0; width:0; background: transparent;} 92%{ right:-50px; height:0; width:0; background: transparent;} 93%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:80px;}}
+ 		@-moz-keyframes cloude-move-1{0% { right:80px; width: 3.5em;  height: 1.2em;} 90%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 91%{ right:1350px; height:0; width:0; background: transparent;} 92%{ right:-50px; height:0; width:0; background: transparent;} 93%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:80px;}}
+ 		@-webkit-keyframes cloude-move-1{0% { right:80px; width: 3.5em;  height: 1.2em;} 90%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 91%{ right:1350px; height:0; width:0; background: transparent;} 92%{ right:-50px; height:0; width:0; background: transparent;} 93%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:80px;}}
  		@keyframes cloude-move-2{ 0% {right:330px; width: 3.5em; height: 1.2em;} 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px; height:0;width:0;background: transparent;} 73%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:330px;}}
 		@-moz-keyframes cloude-move-2{ 0% {right:330px; width: 3.5em; height: 1.2em;} 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px; height:0;width:0;background: transparent;} 73%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:330px;}}
-
 		@-webkit-keyframes cloude-move-2{ 0% {right:330px; width: 3.5em; height: 1.2em;} 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px; height:0;width:0;background: transparent;} 73%{right:-50px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:330px;}}
-
-
 		@keyframes cloude-move-3{ 0% {right:650px; width: 3.5em; height: 1.2em; } 50%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 51%{right:1350px; height:0;width:0;background: transparent;} 52%{right:-50px;height:0;width:0;background: transparent;} 53%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:650px;}}
 		@-moz-keyframes cloude-move-3{ 0% {right:650px; width: 3.5em; height: 1.2em; } 50%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 51%{right:1350px; height:0;width:0;background: transparent;} 52%{right:-50px;height:0;width:0;background: transparent;} 53%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:650px;}}
 		@-webkit-keyframes cloude-move-3{ 0% {right:650px; width: 3.5em; height: 1.2em; } 50%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 51%{right:1350px; height:0;width:0;background: transparent;} 52%{right:-50px;height:0;width:0;background: transparent;} 53%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:650px;}}
+		@keyframes cloude-move-4{ 0% {right:450px; width: 3.5em; height: 1.2em; } 60%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 61%{right:1350px; height:0;width:0;background: transparent;} 62%{right:-50px;height:0;width:0;background: transparent;} 63%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:450px;}}
+		@-moz-keyframes cloude-move-4{ 0% {right:450px; width: 3.5em; height: 1.2em; } 60%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 61%{right:1350px; height:0;width:0;background: transparent;} 62%{right:-50px;height:0;width:0;background: transparent;} 63%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:450px;}}
+		@-webkit-keyframes cloude-move-4{ 0% {right:450px; width: 3.5em; height: 1.2em; } 60%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 61%{right:1350px; height:0;width:0;background: transparent;} 62%{right:-50px;height:0;width:0;background: transparent;} 63%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:450px;}}
+		@keyframes cloude-move-5{ 0% {right:790px; width: 3.5em; height: 1.2em; } 40%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 41%{right:1350px; height:0;width:0;background: transparent;} 42%{right:-50px;height:0;width:0;background: transparent;} 43%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:750px;}}
+		@-moz-keyframes cloude-move-5{ 0% {right:790px; width: 3.5em; height: 1.2em; } 40%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 41%{right:1350px; height:0;width:0;background: transparent;} 42%{right:-50px;height:0;width:0;background: transparent;} 43%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:750px;}}
+		@-webkit-keyframes cloude-move-5{ 0% {right:790px; width: 3.5em; height: 1.2em; } 40%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 41%{right:1350px; height:0;width:0;background: transparent;} 42%{right:-50px;height:0;width:0;background: transparent;} 43%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:750px;}}
+		@keyframes cloude-move-6{ 0% {right:230px; width: 3.5em; height: 1.2em; } 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px;height:0;width:0;background: transparent;} 73%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:230px;}}
+		@-moz-keyframes cloude-move-6{ 0% {right:230px; width: 3.5em; height: 1.2em; } 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px;height:0;width:0;background: transparent;} 73%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:230px;}}
+		@-webkit-keyframes cloude-move-6{ 0% {right:230px; width: 3.5em; height: 1.2em; } 70%{right:1300px; width: 3.5em; height: 1.2em; background: #f6f6f6;} 71%{right:1350px; height:0;width:0;background: transparent;} 72%{right:-50px;height:0;width:0;background: transparent;} 73%{right:-50px;width: 3.5em; height: 1.2em; background: #f6f6f6;} 100% {right:230px;}}
 
+		.mountain {position:absolute; bottom:-240px; right:-50px; border: 1px solid #339144; width:400px; height:400px; background:#339944; border-radius:65px; -moz-border-radius:65px; -webkit-border-radius:65px; transform:rotate(45deg); -moz-transform:rotate(45deg); -webkit-transform:rotate(45deg);}
+		.mountain.mountain-1 {bottom:-300px; right:200px; width:500px; height:500px;}
+		.mountain.mountain-2 {bottom:-200px; right:450px; width:350px; height:350px;}
+		.mountain.mountain-3 {bottom:-260px; right:700px; width:450px; height:450px;}
+
+		.plane {position:absolute; top:320px; right:20px; width:100px; height:35px; transform:rotateX(20deg);  -moz-transform:rotateX(20deg);  -webkit-transform:rotateX(20deg); animation:flying 50s ease infinite; -moz-animation:flying 50s ease infinite; -webkit-animation:flying 50s ease infinite;}
+		.plane-body {position:absolute; top:20px; right:0; z-index:2; width:75px; height:20px; background:#2366cc;}
+		.plane-head {position:absolute; top:20px; left:15px; width:20px; height:20px; border-radius:40%; -moz-border-radius:40%; -webkit-border-radius:40%; background:#2366cc;}
+		.plane-tail {position:absolute; top:20px; right:-10px; width:20px; height:20px; background:#2366cc; border-radius:40%; -moz-border-radius:40%; -webkit-border-radius:40%;}
+		.plane-wing-right {position:absolute; left:60px; top:4px; z-index:1; width:30px; height:20px; transform: skew(-60deg); -moz-transform: skew(-60deg); -webkit-transform: skew(-60deg); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background:#2344aa;}
+		.plane-wing-left {position:absolute; left:60px; top:36px; z-index:3; width:30px; height:20px; transform: skew(-60deg); -moz-transform: skew(-60deg); -webkit-transform: skew(60deg); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background:#2344aa;}
+		.plane-window {position:absolute; top:24px; left:24px; z-index:3; width:4px; height:4px; background:#2b2b2b;}
+		.plane-window.plane-window-1 {left:34px;}
+		.plane-window-2 {left:42px;}
+		.plane-window-3 {left:52px;}
+		.plane-window-4 {left:62px;}
+		.plane-window-5 {left:72px;}
+		.plane-window-6 {left:82px;}
+		.plane-window-7 {left:92px;}
+
+		@keyframes flying { 0% {right:20px; width: 100px; height:35px; } 95%{right:1300px; width:100px; height:35px; z-index:2;} 96%{right:1350px; height:0;width:0; z-index:-1;} 97%{right:-50px;height:0;width:0; z-index:-1;} 98%{right:-50px;width:100px; height:35px; z-index:2;} 100% {right:20px;}}
+		@-moz-keyframes flying { 0% {right:20px; width: 100px; height:35px; } 95%{right:1300px; width:100px; height:35px; z-index:2;} 96%{right:1350px; height:0;width:0; z-index:-1;} 97%{right:-50px;height:0;width:0; z-index:-1;} 98%{right:-50px;width:100px; height:35px; z-index:2;} 100% {right:20px;}}
+		@-webkit-keyframes flying { 0% {right:20px; width: 100px; height:35px; } 95%{right:1300px; width:100px; height:35px; z-index:2;} 96%{right:1350px; height:0;width:0; z-index:-1;} 97%{right:-50px;height:0;width:0; z-index:-1;} 98%{right:-50px;width:100px; height:35px; z-index:2;} 100% {right:20px;}}
 
 	</style>
 	<% end %>
-	<div class="canvas-frame">
-		<div class="canvas">
-			<div class="sun counter-clockwise">
-				<div class="sun-ear"></div>
-				<div class="sun-ear sun-ear-2"></div>
-				<div class="sun-ear sun-ear-3"></div>
+	<div class="canvas">
+		<div class="sun counter-clockwise">
+			<div class="sun-ear"></div>
+			<div class="sun-ear sun-ear-2"></div>
+			<div class="sun-ear sun-ear-3"></div>
+		</div>
+		<div class="sun clockwise">
+			<div class="sun-ear sun-ear-color"></div>
+			<div class="sun-ear sun-ear-color sun-ear-2"></div>
+			<div class="sun-ear sun-ear-color sun-ear-3"></div>
+		</div>
+		<div class="sun sun-face">
+			<div class="sun-glasses">
+				<div class="sun-glass left col"></div><div class="sun-glass-bridge col"></div><div class="sun-glass right col"></div>
 			</div>
-			<div class="sun clockwise">
-				<div class="sun-ear sun-ear-color"></div>
-				<div class="sun-ear sun-ear-color sun-ear-2"></div>
-				<div class="sun-ear sun-ear-color sun-ear-3"></div>
-			</div>
-			<div class="sun sun-face">
-				<div class="sun-glasses">
-					<div class="sun-glass left col"></div><div class="sun-glass-bridge col"></div><div class="sun-glass right col"></div>
-				</div>
-			</div>
-			<div class="cloude cloude-pos-1">
-				<i class="cloude-1"></i>
-				<b class="cloude-2"></b>
-			</div>
-			<div class="cloude cloude-pos-2">
-				<i class="cloude-1"></i>
-				<b class="cloude-2"></b>
-			</div>
-			<div class="cloude cloude-pos-3">
-				<i class="cloude-1"></i>
-				<b class="cloude-2"></b>
-			</div>
+		</div>
+		<div class="cloude cloude-pos-1">
+			<i class="cloude-1"></i>
+			<b class="cloude-2"></b>
+		</div>
+		<div class="cloude cloude-pos-2">
+			<i class="cloude-1"></i>
+			<b class="cloude-2"></b>
+		</div>
+		<div class="cloude cloude-pos-3">
+			<i class="cloude-1"></i>
+			<b class="cloude-2"></b>
+		</div>
+		<div class="cloude cloude-pos-4">
+			<i class="cloude-1"></i>
+			<b class="cloude-2"></b>
+		</div>
+		<div class="cloude cloude-pos-5">
+			<i class="cloude-1"></i>
+			<b class="cloude-2"></b>
+		</div>
+		<div class="cloude cloude-pos-6">
+			<i class="cloude-1"></i>
+			<b class="cloude-2"></b>
+		</div>
+		<div class="mountain"></div>
+		<div class="mountain mountain-1"></div>
+		<div class="mountain mountain-2"></div>
+		<div class="mountain mountain-3"></div>
+		<div class="mountain mountain-4"></div>
+
+		<div class="plane">
+			<div class="plane-head"></div>
+			<div class="plane-body"></div>
+			<div class="plane-tail"></div>
+			<div class="plane-wing-right"></div>
+			<div class="plane-wing-left"></div>
+			<div class="plane-window"></div>
+			<div class="plane-window plane-window-1"></div>
+			<div class="plane-window plane-window-2"></div>
+			<div class="plane-window plane-window-3"></div>
+			<div class="plane-window plane-window-4"></div>
+			<div class="plane-window plane-window-5"></div>
+			<div class="plane-window plane-window-6"></div>
+			<div class="plane-window plane-window-7"></div>
 		</div>
 	</div>
 </div>
