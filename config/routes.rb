@@ -1,10 +1,5 @@
 Gulp::Application.routes.draw do
     root to: 'public#home'
-
-
-
-
-
     match '/public/:action', controller: 'public'
   # The priority is based upon order of creation:
   # first created -> highest priority.

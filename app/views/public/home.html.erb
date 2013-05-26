@@ -117,13 +117,14 @@
 		@-webkit-keyframes icon_shake {0%{-webkit-transform:rotate(0deg);} 25%{-webkit-transform:rotate(-30deg);} 50%{-webkit-transform:rotate(0deg);} 75%{-webkit-transform:rotate(30deg);} 100%{-webkit-transform:rotate(0deg);}}
 
 
-		.categories {position:relative; overflow:hidden; min-width:1000px; margin-top:220px;}
+		.categories {position:relative; overflow:hidden; min-width:1000px; margin-top:140px;}
 		.category-ball {position:absolute; top:-50px; width:600px; height:600px; font-family:'Finger Paint', cursive; color:#ff0000; font-size:50px;  border-radius:50%; border-radius:50%; border-radius:50%;}
 		.category-ball-1 {top:-50px; left:-200px; z-index:3; padding:150px 0 0 220px; background:#fff;}
-		.category-ball-2 {left:-160px; z-index:2; border:5px solid #fff; padding:0; -webkit-transition:background 0.6s ease 0.2s; background:#3f4169}
+		.category-ball-2 {left:-160px; z-index:2; border:5px solid #fff; padding:0; -webkit-transition:background 0.4s ease; background:#3f4169}
 		.category-ball-2.js-link {background:#e5676e;}
 		.category-ball-2.ror-link {background:#b2e4e9;}
 		.category-ball-2.css-link {background:#9a021d;}
+		.category-ball-2.gallery-link {background:#efb487;}
 		.category {text-align:right; height:85px; padding-right:40px; font-size:30px; line-height:80px; border-bottom:5px solid #fff; }
 		.category-link {color:#fff; font-weight:bold; text-shadow:0 0 3px rgba(0,0,0,0.5);}
 		.category-link:hover {text-decoration:underline; text-shadow:0 0 3px rgba(0,0,0,0.9);}
@@ -152,6 +153,11 @@
 				ball.addClass('css-link');
 			},function(){
 				ball.removeClass('css-link');
+			});
+			$('#gallery-link').hover(function(){
+				ball.addClass('gallery-link');
+			},function(){
+				ball.removeClass('gallery-link');
 			});
 		});
 	</script>
@@ -237,7 +243,6 @@
 			<div class="plane-window plane-window-5"></div>
 			<div class="plane-window plane-window-6"></div>
 			<div class="plane-window plane-window-7"></div>
-
 		</div>
 		<h1 class="banner">
 			I JUST<br/>
@@ -253,7 +258,7 @@
 		<div id="js-link" class="category category-1"><a class="category-link">Javascript</a></div>
 		<div id="ror-link" class="category category-2"><a class="category-link">Ruby on Rails</a></div>
 		<div id="css-link" class="category category-3"><a class="category-link">CSS & HTML</a></div>
-		<div class="category category-4"></div>
+		<div id="gallery-link" class="category category-4"><a class="category-link">Galleries</a></div>
 		<div class="category category-5"></div>
 	</div>
 </div>

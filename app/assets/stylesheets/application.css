@@ -16,6 +16,7 @@ html,body{height:100%; margin:0; padding:0;}
 body {ont-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; color:#333;}
 a {cursor:pointer; text-decoration:none;}
 p {line-height:1.4;}
+pre {margin:0 0 20px;}
 pre code {display:block; padding:0 30px 18px; border: 2px solid #eee; font-size:14px; color:#cecece; background:#3b3b3b; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
 strong {font-weight:bold; text-transform:uppercase; background:#ffb;}
 /*a*/
@@ -37,6 +38,7 @@ strong {font-weight:bold; text-transform:uppercase; background:#ffb;}
 
 /*h*/
 .hidden {display:none;}
+.html-demo-s {position:relative; height:400px; margin-bottom:60px; border:1px solid #ececec;}
 /*i*/
 .ie8 .post-title {color:#222;}
 /*j*/
@@ -66,6 +68,7 @@ strong {font-weight:bold; text-transform:uppercase; background:#ffb;}
 .post-title {margin:0 0 24px; padding:0 0 3px; border-bottom:1px solid #ececec; font-size:24px; color: #fff; text-shadow: 0 0 3px rgba(0,0,0,0.75);}
 .post-wrapper {padding:6px;}
 .point-title {padding:18px 0; font-size:20px; color:#222;}
+.post-end {text-align:right; padding-bottom:80px; color:#f05;}
 /*q*/
 
 /*r*/
@@ -75,6 +78,7 @@ strong {font-weight:bold; text-transform:uppercase; background:#ffb;}
 .swing-right {float:right;}
 /*t*/
 .t-warning {font-weight:bold; color:#b03;}
+.t-aside {color: #087;}
 .tilt-right {text-align:right;}
 
 /*u*/
