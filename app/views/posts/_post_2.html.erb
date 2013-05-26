@@ -56,7 +56,7 @@
 		</li>
 		<li>
 			<h2 class="point-title">Understand how CSS position works. </h2>
-			<p>The position of an object is based on its closest parent container that have either <strong>absolute</strong> or <strong>relative</strong> CSS property. If there is none, the positioning of the object will be based on its relative position of the window.<span>P.S. The parent-container does not have to be the direct parent container to the child-container</span></p>
+			<p>The position of an object is based on its closest parent container that have either <span class="t-css">absolute</span> or <span class="t-css">relative</span> CSS property. If there is none, the positioning of the object will be based on its related position to the window.</p>
 		</li>
 		<li>
 			<p>To achieve number two. Assume we have the following set up</p>
@@ -81,8 +81,6 @@
   }
 &lt;style&gt;
 </code>
-			</pre>
-			<pre>
 <code lang="html">
 &lt;html&gt;
     &lt;div class="container-2"&gt;
@@ -132,7 +130,7 @@
 &lt;/html&gt;
 </code>
 			</pre>
-			<p>Given container-1 with <span class="t-warning">absolute position</span>, container-2 with <span class="t-warning">no predefined position</span> and container-3 with <span class="t-warning">relative position.</span> We can see that container-2 without having the property <strong>position</strong>, the CSS properties <strong>left, top</strong> possess no effect at all. Thus, the CSS property <strong>position</strong> allows CSS properties like <strong>top, right, bottom, left</strong> to take effects on the container.</p>
+			<p>Given container-1 with <span class="t-warning">absolute position</span>, container-2 with <span class="t-warning">no predefined position</span> and container-3 with <span class="t-warning">relative position.</span> We can see that container-2 with no defined position either <span class="t-css">relative or absolute</span>, the CSS properties <span class="t-css">left, top</span> possess no effect at all. In conclusion, by defining container's CSS property <span class="t-css">position</span>, it allows CSS properties like <span class="t-css">top, right, bottom, left</span> to take effects on the container.</p>
 
 			<div class="html-demo-s demo-3">
 				<div class="container-1">1</div>
@@ -151,7 +149,7 @@
 &lt;/html&gt;
 </code>
 			</pre>
-			<p>It seems now container-2 <span class="t-aside">(no position)</span> is moved 50 pixels down from the top. How so? The answer is that even container-3 <span class="t-aside">(relative position)</span> is appears to be 250 pixels down from the top, <span class="t-warning">its actual position is still placed exist at the top of the window.</span> That being said, we reach the difference between <strong>position absolute and relative</strong> which is that <strong>position relative</strong> occupies the phyiscal space in the window, but <strong>position absolute</strong> does not.</p>
+			<p>It seems now container-2 <span class="t-aside">(no position)</span> is moved 50 pixels down from the top. How so? The answer is that even container-3 <span class="t-aside">(relative position)</span> is appears to be 250 pixels down from the top, <span class="t-warning">its actual position is still placed exist at the top of the window.</span> That being said, we reach the difference between <span class="t-css">position absolute and relative</span> which is that <span class="t-css">position relative</span> occupies the phyiscal space in the window, but <span class="t-css">position absolute</span> does not.</p>
 			<div class="html-demo-s demo-3">
 				<div class="container-1">1</div>
 				<div class="container-3">3</div>
