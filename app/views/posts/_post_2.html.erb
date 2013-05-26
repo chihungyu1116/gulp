@@ -1,0 +1,162 @@
+<% content_for :style do %>
+	<style>
+		.container-1,.container-2,.container-3,.container-4 {width:50px; height:50px; background: red; font-size:16px; font-weight:bold; color:#fff; line-height:50px; text-align:center;}
+		.demo-1 .container-1 {position: absolute; left:50px; top:50px;}
+		.demo-2 .container-1 {position: absolute; left:50px; top:50px;}
+		.demo-2 .container-2 {position: absolute; left:150px; top:50px;}
+		.demo-2 .container-3 {position: absolute; right:150px; top:150px;}
+		.demo-2 .container-4 {position: absolute; right:225px; top:275px;}
+		.demo-2 .triangle {position: absolute; top: -10px; left: 15px; border-width:0 10px 10px 10px; border-color:green transparent green transparent; border-style:solid;}
+
+		.demo-3 .container-1 {position: absolute; top:50px; left:50px;}
+		.demo-3 .container-2 {top:150px; left:50px;}
+		.demo-3 .container-3 {position: relative; top:250px; left:50px;}
+	</style>
+<% end %>
+
+<h1 class="post-title">Understand CSS Position Absolute</h1>
+	<ol>
+		<li>
+			<p>Assume we have the following css setting</p>
+			<pre>
+<code lang="css">
+&lt;style&gt;
+  .container-1 {
+    position:absolute;
+    width:50px;
+    height:50px;
+    left:50px;
+    top:50px;
+    background:red;
+  }
+&lt;style&gt;
+</code>
+		</pre>
+			<p>It will position 50 pixels from the left side of the window and 50 pixels from the top of the window.</p>
+			<div class="html-demo-s demo-1">
+				<div class="container-1"></div>
+			</div>
+		</li>
+		<li>
+			<p>Question comes! How do I achieve something more complicated? Like always positions the triangle at the top of the container without knowing where that container is? Like the following example. Regardless where I position my containers, triangles will always follow them.
+			<div class="html-demo-s demo-2">
+				<div class="container-1">
+					<div class="triangle"></div>
+				</div>
+				<div class="container-2">
+					<div class="triangle"></div>
+				</div>
+				<div class="container-3">
+					<div class="triangle"></div>
+				</div>
+				<div class="container-4">
+					<div class="triangle"></div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<h2 class="point-title">Understand how CSS position works. </h2>
+			<p>The position of an object is based on its closest parent container that have either <strong>absolute</strong> or <strong>relative</strong> CSS property. If there is none, the positioning of the object will be based on its relative position of the window.<span>P.S. The parent-container does not have to be the direct parent container to the child-container</span></p>
+		</li>
+		<li>
+			<p>To achieve number two. Assume we have the following set up</p>
+			<pre>
+<code lang="css">
+&lt;style&gt;
+  .child-container {
+    position:absolute;
+    top: -10px; 
+    left: 15px; 
+    border-width:0 10px 10px 10px; 
+    border-color:green transparent green transparent; 
+    border-style:solid;
+  }
+  .parent-container {
+    position:relative;
+    width:50px;
+    height:50px;
+    left:50px;
+    top:50px;
+    background:red;
+  }
+&lt;style&gt;
+</code>
+			</pre>
+			<pre>
+<code lang="html">
+&lt;html&gt;
+    &lt;div class="container-2"&gt;
+      &lt;div class="container-1"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/html&gt;
+</code>
+			</pre>
+			<p>The positioning of the container-1 will be related to containe-2 rather than to the window. Since the container-2 is the closest parent container to the container-1. <span class="t-warning">P.S. container-2 does not have to the container-1's direct parent.</span></p>
+		</li>
+		<li>
+			<h2 class="point-title">Differences between position relative and absolute</h2>
+			<p>Before talking about their difference, lets look at what they have in common. Given the following CSS and HTML</p>
+			<pre>
+<code lang="css">
+&lt;style&gt;
+  .container-1 {
+    position:absolute;
+    width:50px;
+    height:50px
+    top:50px; 
+    left:50px; 
+    background: red;
+  }
+  .container-2 {
+ 	width:50px;
+    height:50px;
+    top:250px;
+    left:50px;
+    background:red;
+  }
+  .container-3 {
+    position:relative;
+    width:50px;
+    height:50px;
+    top:150px;
+    left:50px;
+    background:red;
+  }
+&lt;style&gt;
+</code>
+<code lang="html">
+&lt;html&gt;
+    &lt;div class="container-1"&gt;
+    &lt;div class="container-2"&gt;
+    &lt;div class="container-3"&gt;
+&lt;/html&gt;
+</code>
+			</pre>
+			<p>Given container-1 with <span class="t-warning">absolute position</span>, container-2 with <span class="t-warning">no predefined position</span> and container-3 with <span class="t-warning">relative position.</span> We can see that container-2 without having the property <strong>position</strong>, the CSS properties <strong>left, top</strong> possess no effect at all. Thus, the CSS property <strong>position</strong> allows CSS properties like <strong>top, right, bottom, left</strong> to take effects on the container.</p>
+
+			<div class="html-demo-s demo-3">
+				<div class="container-1">1</div>
+				<div class="container-2">2</div>
+				<div class="container-3">3</div>
+			</div>
+		</li>
+		<li>
+			<p>Continue to the previous point. What if we put container-3 <span class="t-aside">(relative position)</span> before container-2 <span class="t-aside">(no position)</span></p>
+			<pre>
+<code lang="html">
+&lt;html&gt;
+    &lt;div class="container-1"&gt;
+    &lt;div class="container-3"&gt;
+    &lt;div class="container-2"&gt;
+&lt;/html&gt;
+</code>
+			</pre>
+			<p>It seems now container-2 <span class="t-aside">(no position)</span> is moved 50 pixels down from the top. How so? The answer is that even container-3 <span class="t-aside">(relative position)</span> is appears to be 250 pixels down from the top, <span class="t-warning">its actual position is still placed exist at the top of the window.</span> That being said, we reach the difference between <strong>position absolute and relative</strong> which is that <strong>position relative</strong> occupies the phyiscal space in the window, but <strong>position absolute</strong> does not.</p>
+			<div class="html-demo-s demo-3">
+				<div class="container-1">1</div>
+				<div class="container-3">3</div>
+				<div class="container-2">2</div>
+			</div>
+		</li>
+</ol>
+<div class="post-end">(end)</div>
