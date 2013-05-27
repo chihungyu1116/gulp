@@ -9,6 +9,7 @@
 
 		.inputs {padding:0 10px; width:80px; height:40px; margin:0 20px;}
 		.multi {line-height:40px; font-size:26px;}
+		.explan {margin-bottom:40px; color:#f05;}
 	</style>
 <% end %>
 <% content_for :scripts do %>
@@ -31,9 +32,13 @@
   	</script>
 <% end %>
 
+
+<h1>No Brainer Maze Generator</h1>
 <div id="maze_button" class="col rnd-s">
 	change
 </div><input id="width_input" type="text" class="col inputs" value="18"><span class="col multi">X</span><input id="height_input" type="text" class="col inputs" value="18">
+
+<div class="explan">width and height has to be greater than 0 and less than 30. (if you cannot pass this, you are bad)</div>
 <div id="maze"></div>
 
 
