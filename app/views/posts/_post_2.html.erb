@@ -14,8 +14,12 @@
 	</style>
 <% end %>
 
-<h1 class="post-title">Understand CSS Position Absolute</h1>
+<h1 class="post-title">Understand CSS Position Absolute & Relative</h1>
 	<ol>
+		<li>
+			<p>The CSS property `position` can be assigned with values like (absolute | relative | static | fixed | inherit). In this tutorial, we will cover position absolute and position relative.</p>
+			<p>By assigning an value to the `position` to an element, it allows the following CSS properties to take effects, <span class="t-warning">top, right, bottom, left and z-index.</span>. In addition, by positioning an element as absolute, this element will no longer occupy the physical space in the HTML and will not affect the positioning of other elements.</p>
+		</li>
 		<li>
 			<p>Assume we have the following css setting</p>
 			<pre>
@@ -38,7 +42,7 @@
 			</div>
 		</li>
 		<li>
-			<p>Question comes! How do I achieve something more complicated? Like always positions the triangle at the top of the container without knowing where that container is? Like the following example. Regardless where I position my containers, triangles will always follow them.
+			<p>But how do I achieve something more complicated? Like the below example. I would like to position the triangle at the top of elements regardless where I position my elements.
 			<div class="html-demo-s demo-2">
 				<div class="container-1">
 					<div class="triangle"></div>
@@ -56,10 +60,10 @@
 		</li>
 		<li>
 			<h2 class="point-title">Understand how CSS position works. </h2>
-			<p>The position of an object is based on its closest parent container that is either positioned <span class="t-css">absolute</span> or <span class="t-css">relative</span>. If there is none, the positioning of the object will be relative to the window.</p>
+			<p>The `position` of an elements is based on its closest parent container (does not have to be the direct parent container) that is either positioned `absolute` or `relative`. If none defined, the positioning of elements will be relative to the window.</p>
 		</li>
 		<li>
-			<p>To achieve number two. Assume we have the following set up</p>
+			<p>Assume we have the following set up</p>
 			<pre>
 <code lang="css">
 &lt;style&gt;
@@ -89,8 +93,7 @@
 &lt;/html&gt;
 </code>
 			</pre>
-			<p>The positioning of the container-1 will be relative to containe-2 rather than to the window. Since the container-2 is the closest parent container to the container-1. <span class="t-aside">P.S. container-2 does not have to the container-1's direct parent.</span></p>
-		</li>
+			<p>The positioning of the container-1 will be relative to containe-2 rather than to the window. Since the container-2 is the closest parent container to the container-1.</p>
 		<li>
 			<h2 class="point-title">Position relative and absolute?</h2>
 			<p>Given the following CSS and HTML</p>
@@ -130,7 +133,8 @@
 &lt;/html&gt;
 </code>
 			</pre>
-			<p>Given container-1 with <span class="t-css">absolute position</span>, container-2 with <span class="t-warning">no predefined position</span> and container-3 with <span class="t-css">relative position.</span> We can see that container-2 with no defined position, does not get affected by CSS properties <span class="t-css">left</span> and <span class="t-css">top.</span> In conclusion, by defining container's <span class="t-css">position</span>, it allows <span class="t-css">top, right, bottom, left</span> to take effects on the container.</p>
+			<p>Given container-1 with absolute position, container-2 with no predefined position and container-3 with relative position. We can see that container-2 with no defined position, does not get affected by CSS properties `left` and `top`.</p>
+
 			<div class="html-demo-s demo-3">
 				<div class="container-1">1</div>
 				<div class="container-2">2</div>
@@ -138,7 +142,7 @@
 			</div>
 		</li>
 		<li>
-			<p>However, what if we switch the order of container-2 with container-3?</p>
+			<p>What if we switch the order of container-2 with container-3?</p>
 			<pre>
 <code lang="html">
 &lt;html&gt;
@@ -148,8 +152,7 @@
 &lt;/html&gt;
 </code>
 			</pre>
-			<p>Container-2 <span class="t-aside">(no position)</span> is moved 50 pixels down from the top. How so? The answer is that even container-3 <span class="t-aside">(relative position)</span> is set to be 250 pixels down from the top, <span class="t-warning">its physical position is still placed at the top of the window.</span></p>
-			<p>In addition, we can see that container-1 <span class="t-aside">(absolute position)</span> does not affect the positioning of both container-2 and container-3.</p>
+			<p>Container-2 is moved 50 pixels down from the top. How so? The answer is that even container-3 appears to be 250 pixels down from the top, <span class="t-warning">its physical position is still at the top of the window.</span></p>
 			<div class="html-demo-s demo-3">
 				<div class="container-1">1</div>
 				<div class="container-3">3</div>

@@ -68,7 +68,7 @@ strong {font-weight:bold; text-transform:uppercase; background:#ffb;}
 .post-title {margin:0 0 24px; padding:0 0 3px; border-bottom:1px solid #ececec; font-size:24px; color: #fff; text-shadow: 0 0 3px rgba(0,0,0,0.75);}
 .post-wrapper {padding:6px;}
 .point-title {padding:18px 0; font-size:20px; color:#222;}
-.post-end {text-align:right; padding-bottom:80px; color:#f05;}
+.post-end {text-align:right; padding:40px 0 80px;  color:#f05;}
 /*q*/
 
 /*r*/
@@ -79,7 +79,6 @@ strong {font-weight:bold; text-transform:uppercase; background:#ffb;}
 /*t*/
 .t-warning {font-weight:bold; color:#b03;}
 .t-aside {color: #087;}
-.t-css {color: #330bb0; font-weight: bold;}
 .tilt-right {text-align:right;}
 
 /*u*/
