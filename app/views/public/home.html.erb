@@ -126,7 +126,7 @@
 		.category-ball-2.css-link {background:#9a021d;}
 		.category-ball-2.gallery-link {background:#efb487;}
 		.category {text-align:right; height:85px; padding-right:40px; font-size:30px; line-height:80px; border-bottom:5px solid #fff; }
-		.category-link {color:#fff; font-weight:bold; text-shadow:0 0 3px rgba(0,0,0,0.5);}
+		.category-link {display:block; color:#fff; font-weight:bold; text-shadow:0 0 3px rgba(0,0,0,0.5);}
 		.category-link:hover {text-decoration:underline; text-shadow:0 0 3px rgba(0,0,0,0.9);}
 		.category-1 {background:#e5676e;}
 		.category-2 {background:#b2e4e9;}
@@ -255,10 +255,10 @@
 			&nbsp;&nbsp;&nbsp;Content
 		</div>
 		<div id="category-ball" class="category-ball category-ball-2"></div>
-		<div id="js-link" class="category category-1"><a href="/public/js_posts" class="category-link">Javascript</a></div>
-		<div id="ror-link" class="category category-2"><a href="/public/rails_posts" class="category-link">Ruby on Rails</a></div>
-		<div id="css-link" class="category category-3"><a href="/public/css_html_posts" class="category-link">CSS & HTML</a></div>
-		<div id="gallery-link" class="category category-4"><a href="/public/galleries_posts" class="category-link">Galleries</a></div>
+		<a href="/public/js_posts" id="js-link" class="category category-1 category-link">Javascript</a>
+		<a href="/public/rails_posts" id="ror-link" class="category category-2 category-link">Ruby on Rails</a>
+		<a href="/public/css_html_posts" id="css-link" class="category category-3 category-link">CSS & HTML</a>
+		<a href="/public/galleries_posts" id="gallery-link" class="category category-4 category-link">Galleries</a>
 		<div class="category category-5"></div>
 	</div>
 </div>
