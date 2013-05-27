@@ -1,0 +1,23 @@
+<div class="wrapper view-about">
+	<% content_for :style do %>
+	<style>
+		.mod {position:relative; padding:20px; margin-bottom:60px; border:1px solid #ececec;}
+	</style>
+	<% end %>
+	<%= render partial: 'share/app_blog_title', locals: { title:'About' }  %>
+
+	<div class="mod mod-1 col rnd-s">
+		<p>This is the facebook interview question I solved. (100% working solution)</p>
+		<a href="https://github.com/chihungyu1116/facebook_calendar_puzzle" class="link-external">Facebook Interview Puzzle</a>
+	</div>
+	<div class="mod mod-2 col rnd-s">
+		<p>Gulpio is the single web application I wrote using BackboneJs and RequireJs following the mediator pattern. It's very lightweight and able to load files as needed rather than compressing all javascript into one javascript. (not production ready, only spent few days writing it)</p>
+		&nbsp;&nbsp;<a href="https://github.com/chihungyu1116/gulpio" class="link-external">Gulpio</a>
+		<p>This is my profile page that uses it</p>
+		&nbsp;&nbsp;<a href="www.gulpio.com" class="link-external">website</a>
+	</div>
+	<div class="mod mod-3 col rnd-s">
+		<p>My github</p>
+		&nbsp;&nbsp;<a href="https://github.com/chihungyu1116" class="link-external">github</a>
+	</div>
+</div>

@@ -6,9 +6,9 @@ class PublicController < ApplicationController
 		render 'public/home', layout: 'application'
 	end
 
-	def contact
-		@active_pg_head_link = "contact"
-		render 'public/contact', layout: 'application'
+	def about
+		@active_pg_head_link = "about"
+		render 'public/about', layout: 'application'
 	end
 
 	def posts
