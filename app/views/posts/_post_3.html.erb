@@ -6,6 +6,9 @@
 		.maze-no-path {background:#2b2b2b;}
 
 		#maze_button {padding:10px; margin-bottom:20px; border:1px solid #373737; cursor:pointer;}
+
+		.inputs {padding:0 10px; width:80px; height:40px; margin:0 20px;}
+		.multi {line-height:40px; font-size:26px;}
 	</style>
 <% end %>
 <% content_for :scripts do %>
@@ -13,17 +16,24 @@
   	<script>
   	jQuery(document).ready(function($){
   		$('#maze_button').click(function(){
-  			window.maze.init({
-				map_id : '#maze',
-				num_blocks_width : 20,
-				num_blocks_height : 20
-			});
+  			var width_input = parseInt($('#width_input').val()),
+  				height_input = parseInt($('#height_input').val());
+
+  			if(typeof width_input === 'number' && typeof height_input === 'number'){
+  				maze.init({
+					map_id : '#maze',
+					num_blocks_width : parseInt(width_input),
+					num_blocks_height : parseInt(height_input)
+				});
+  			}
   		});
   	});
   	</script>
 <% end %>
 
-<div id="maze_button" class="col rnd-s">change</div>
+<div id="maze_button" class="col rnd-s">
+	change
+</div><input id="width_input" type="text" class="col inputs" value="18"><span class="col multi">X</span><input id="height_input" type="text" class="col inputs" value="18">
 <div id="maze"></div>
 
 

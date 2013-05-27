@@ -163,8 +163,6 @@ jQuery(document).ready(function($){
 
 			paths_config = set_paths_config();
 			this.allowed_paths_config = get_allowed_paths_config(paths_config);
-
-			console.log(this.allowed_paths_config,'allowed---------');
 		},
 		draw_block : function(path_type,id,type){
 			var container = $('<div id=' + id +' class="maze-modules-container"></div>'),
@@ -179,8 +177,6 @@ jQuery(document).ready(function($){
 			}
 
 			if(type === 'replace'){
-
-				console.log(id);
 				return $('#'+id).html(result);
 			}
 
@@ -239,8 +235,6 @@ jQuery(document).ready(function($){
 				});
 
 				for(i=0; i<arr.length; i++){
-
-					// console.log(arr[i]);
 					if(current !== arr[i]){
 						current = arr[i];
 						count = 1;
@@ -251,8 +245,6 @@ jQuery(document).ready(function($){
 						intersects_arr.push(current);
 					}
 				}
-
-				// console.log('----intersect ', intersects_arr)
 				return intersects_arr;
 			}
 
@@ -262,12 +254,6 @@ jQuery(document).ready(function($){
 					right_path_type = this.blocks[i][j+1];
 					bottom_path_type = this.blocks[i+1][j];
 					left_path_type = this.blocks[i][j-1];
-
-
-					//console.log(this.allowed_paths_config[top_path_type],this.allowed_paths_config[right_path_type],this.allowed_paths_config[bottom_path_type],this.allowed_paths_config[left_path_type]);
-
-					// console.log(top_path_type,right_path_type,bottom_path_type,left_path_type);
-					// console.log('what? ', this.blocks, i-1, j, this.blocks[i-1])
 					top_allowed = top_path_type === 12 ? take_all : this.allowed_paths_config[top_path_type]['top'];
 					right_allowed = right_path_type === 12 ? take_all : this.allowed_paths_config[right_path_type]['right'];
 					bottom_allowed = bottom_path_type === 12 ? take_all : this.allowed_paths_config[bottom_path_type]['bottom'];
@@ -281,8 +267,8 @@ jQuery(document).ready(function($){
 					allowed_path_arr = get_intersects(top_allowed,right_allowed,bottom_allowed,left_allowed);
 					random_picked = this.get_random(allowed_path_arr);
 					path_picked = allowed_path_arr.length === 0 ? 0 : allowed_path_arr[random_picked];
-
 					this.blocks[i][j] = parseInt(path_picked);
+
 					this.draw_block(path_picked,'block'+ i + '_' + j,'replace');
 				}
 			}
@@ -292,12 +278,14 @@ jQuery(document).ready(function($){
 				num_layers_height = this.num_blocks_height + 2,
 				arr,arrs=[],i,j;
 		
+
+
 			for(i=0;i<num_layers_height;i++){
 				arr = [];
 				for(j=0;j<num_layers_width;j++){
 					if ((i === 1 && j === 0) || ((i === num_layers_height-2) && j === num_layers_width-1)){ // assign entrance and exit => 1s
 						arr.push(6);
-					} else if(i === 0 || j === 0 || i === (num_layers_height-1) || j === (num_layers_height-1)){ // first and last layers => all 0s
+					} else if(i === 0 || j === 0 || i === (num_layers_height-1) || j === (num_layers_width-1)){ // first and last layers => all 0s
 						arr.push(0);
 					} else {
 						arr.push(12);
@@ -311,15 +299,21 @@ jQuery(document).ready(function($){
 			$(this.map_id).html('');
 		},
 		init : function(spec){
+
+
+
+
 			this.map_id = spec.map_id;
 			this.block_width = spec.block_width || 45;
 			this.block_height = spec.block_height || 45;
-			this.num_blocks_width = spec.num_blocks_width; // number of blocks on the width side
-			this.num_blocks_height = spec.num_blocks_height; // number of blocks on the height side
+			this.num_blocks_width = (spec.num_blocks_width > 0 && spec.num_blocks_width < 30) ? spec.num_blocks_width : 10; // number of blocks on the width side
+			this.num_blocks_height = (spec.num_blocks_height > 0 && spec.num_blocks_height < 30) ? spec.num_blocks_height : 10; // number of blocks on the height side
 			
 			this.clear();
 			this.set_allowed_paths_config();
 			this.build_map();
+
+			console.log(this.blocks);
 			this.draw_map_to_boundary();
 			this.draw_map_to_blocks();
 		}
@@ -327,7 +321,7 @@ jQuery(document).ready(function($){
 
 	window.maze.init({
 		map_id : '#maze',
-		num_blocks_width : 20,
-		num_blocks_height : 20
+		num_blocks_width : 18,
+		num_blocks_height : 18
 	});
 });
