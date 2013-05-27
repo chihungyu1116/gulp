@@ -4,13 +4,26 @@
 		.maze-module {float:left; width:15px; height:15px;}
 		.maze-path {background:#fff;}
 		.maze-no-path {background:#2b2b2b;}
+
+		#maze_button {padding:10px; margin-bottom:20px; border:1px solid #373737; cursor:pointer;}
 	</style>
 <% end %>
 <% content_for :scripts do %>
   	<%= javascript_include_tag "maze" %>
+  	<script>
+  	jQuery(document).ready(function($){
+  		$('#maze_button').click(function(){
+  			window.maze.init({
+				map_id : '#maze',
+				num_blocks_width : 20,
+				num_blocks_height : 20
+			});
+  		});
+  	});
+  	</script>
 <% end %>
 
-
+<div id="maze_button" class="col rnd-s">change</div>
 <div id="maze"></div>
 
 
