@@ -13,22 +13,22 @@
 	</style>
 <% end %>
 <% content_for :scripts do %>
-  	<%= javascript_include_tag "maze" %>
+  	<%#= javascript_include_tag "maze" %>
   	<script>
-  	jQuery(document).ready(function($){
-  		$('#maze_button').click(function(){
-  			var width_input = parseInt($('#width_input').val()),
-  				height_input = parseInt($('#height_input').val());
+  	// jQuery(document).ready(function($){
+  	// 	$('#maze_button').click(function(){
+  	// 		var width_input = parseInt($('#width_input').val()),
+  	// 			height_input = parseInt($('#height_input').val());
 
-  			if(typeof width_input === 'number' && typeof height_input === 'number'){
-  				maze.init({
-					map_id : '#maze',
-					num_blocks_width : parseInt(width_input),
-					num_blocks_height : parseInt(height_input)
-				});
-  			}
-  		});
-  	});
+  	// 		if(typeof width_input === 'number' && typeof height_input === 'number'){
+  	// 			maze.init({
+			// 		map_id : '#maze',
+			// 		num_blocks_width : parseInt(width_input),
+			// 		num_blocks_height : parseInt(height_input)
+			// 	});
+  	// 		}
+  	// 	});
+  	// });
   	</script>
 <% end %>
 
