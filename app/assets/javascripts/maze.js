@@ -79,9 +79,8 @@ jQuery(document).ready(function($){
 			'bottom' : ['1','4','6','10'],
 			'left' : ['1','2','5','7']
 		},
-		get_random : function(arr){
-			var len = arr.length;
-			return Math.floor(Math.random()*len);
+		get_random : function(num){ // giving 4 will return 0 to 3
+			return Math.floor(Math.random()*num);
 		},
 		set_allowed_paths_config: function(){
 			var that = this,
@@ -265,7 +264,7 @@ jQuery(document).ready(function($){
 					if(left_allowed.length === 0) left_allowed = this.paths_restriction['left'];
 					
 					allowed_path_arr = get_intersects(top_allowed,right_allowed,bottom_allowed,left_allowed);
-					random_picked = this.get_random(allowed_path_arr);
+					random_picked = this.get_random(allowed_path_arr.length);
 					path_picked = allowed_path_arr.length === 0 ? 0 : allowed_path_arr[random_picked];
 					this.blocks[i][j] = parseInt(path_picked);
 
@@ -299,29 +298,17 @@ jQuery(document).ready(function($){
 			$(this.map_id).html('');
 		},
 		init : function(spec){
-
-
-
-
 			this.map_id = spec.map_id;
-			this.block_width = spec.block_width || 45;
-			this.block_height = spec.block_height || 45;
-			this.num_blocks_width = (spec.num_blocks_width > 0 && spec.num_blocks_width < 30) ? spec.num_blocks_width : 10; // number of blocks on the width side
-			this.num_blocks_height = (spec.num_blocks_height > 0 && spec.num_blocks_height < 30) ? spec.num_blocks_height : 10; // number of blocks on the height side
+			this.block_width = 30;
+			this.block_height = 30;
+			this.num_blocks_width = parseInt((spec.num_blocks_width > 0 && spec.num_blocks_width < 36) ? spec.num_blocks_width : 10); // number of blocks on the width side
+			this.num_blocks_height = parseInt((spec.num_blocks_height > 0 && spec.num_blocks_height < 36) ? spec.num_blocks_height : 10); // number of blocks on the height side
 			
-			this.clear();
-			this.set_allowed_paths_config();
-			this.build_map();
-
-			console.log(this.blocks);
-			this.draw_map_to_boundary();
-			this.draw_map_to_blocks();
+			this.clear(); // clear main container (remove maze)
+			this.set_allowed_paths_config(); // get allowed paths like path 1 allows combination with path 1,2,4,6,8 etc... example -> numbers are inaccurate
+			this.build_map(); // build map in memory then use map to draw
+			this.draw_map_to_boundary(); // draw the boundary
+			this.draw_map_to_blocks(); // draw map
 		}
 	};
-
-	window.maze.init({
-		map_id : '#maze',
-		num_blocks_width : 18,
-		num_blocks_height : 18
-	});
 });

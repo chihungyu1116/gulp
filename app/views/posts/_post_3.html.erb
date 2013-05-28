@@ -1,7 +1,7 @@
 <% content_for :style do %>
 	<style>
-		.maze-modules-container {position:relative; float:left; width:45px; height:45px;}
-		.maze-module {float:left; width:15px; height:15px;}
+		.maze-modules-container {position:relative; float:left; width:30px; height:30px;}
+		.maze-module {float:left; width:10px; height:10px;}
 		.maze-path {background:#fff;}
 		.maze-no-path {background:#2b2b2b;}
 
@@ -13,22 +13,27 @@
 	</style>
 <% end %>
 <% content_for :scripts do %>
-  	<%#= javascript_include_tag "maze" %>
+  	<%= javascript_include_tag "maze" %>
   	<script>
-  	// jQuery(document).ready(function($){
-  	// 	$('#maze_button').click(function(){
-  	// 		var width_input = parseInt($('#width_input').val()),
-  	// 			height_input = parseInt($('#height_input').val());
+  	jQuery(document).ready(function($){
+  		maze.init({
+			map_id : '#maze',
+			num_blocks_width : $('#width_input').val(),
+			num_blocks_height : $('#height_input').val()
+		});
+  		$('#maze_button').click(function(){
+  			var width_input = parseInt($('#width_input').val()),
+  				height_input = parseInt($('#height_input').val());
 
-  	// 		if(typeof width_input === 'number' && typeof height_input === 'number'){
-  	// 			maze.init({
-			// 		map_id : '#maze',
-			// 		num_blocks_width : parseInt(width_input),
-			// 		num_blocks_height : parseInt(height_input)
-			// 	});
-  	// 		}
-  	// 	});
-  	// });
+  			if(typeof width_input === 'number' && typeof height_input === 'number'){
+  				maze.init({
+					map_id : '#maze',
+					num_blocks_width : parseInt(width_input),
+					num_blocks_height : parseInt(height_input)
+				});
+  			}
+  		});
+  	});
   	</script>
 <% end %>
 
@@ -36,9 +41,9 @@
 <h1>No Brainer Maze Generator</h1>
 <div id="maze_button" class="col rnd-s">
 	change
-</div><input id="width_input" type="text" class="col inputs" value="18"><span class="col multi">X</span><input id="height_input" type="text" class="col inputs" value="18">
+</div><input id="width_input" type="text" class="col inputs" value="35"><span class="col multi">X</span><input id="height_input" type="text" class="col inputs" value="35">
 
-<div class="explan">width and height has to be greater than 0 and less than 30. (if you cannot pass this, you are bad)</div>
+<div class="explan">Width and height has to be greater than 0 and less than 36.</div>
 <div id="maze"></div>
 
 
