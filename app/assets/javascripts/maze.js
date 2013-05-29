@@ -102,7 +102,7 @@ jQuery(document).ready(function($){
 				return config;
 			}
 
-			function set_paths_config(){
+			function return_paths_config(){
 				var paths = that.paths,
 					paths_config = {}, 
 					i;
@@ -115,7 +115,7 @@ jQuery(document).ready(function($){
 				return paths_config;
 			}
 
-			function get_allowed_paths_config(paths_config){
+			function return_allowed_paths_config(paths_config){
 				var paths = that.paths,
 					allowed_paths_config = {},
 					i,j,k;
@@ -160,8 +160,8 @@ jQuery(document).ready(function($){
 				return allowed_paths_config;
 			}
 
-			paths_config = set_paths_config();
-			this.allowed_paths_config = get_allowed_paths_config(paths_config);
+			paths_config = return_paths_config();
+			this.allowed_paths_config = return_allowed_paths_config(paths_config);
 		},
 		draw_block : function(path_type,id,type){
 			var container = $('<div id=' + id +' class="maze-modules-container"></div>'),
@@ -253,6 +253,7 @@ jQuery(document).ready(function($){
 					right_path_type = this.blocks[i][j+1];
 					bottom_path_type = this.blocks[i+1][j];
 					left_path_type = this.blocks[i][j-1];
+					
 					top_allowed = top_path_type === 12 ? take_all : this.allowed_paths_config[top_path_type]['top'];
 					right_allowed = right_path_type === 12 ? take_all : this.allowed_paths_config[right_path_type]['right'];
 					bottom_allowed = bottom_path_type === 12 ? take_all : this.allowed_paths_config[bottom_path_type]['bottom'];
@@ -277,8 +278,6 @@ jQuery(document).ready(function($){
 				num_layers_height = this.num_blocks_height + 2,
 				arr,arrs=[],i,j;
 		
-
-
 			for(i=0;i<num_layers_height;i++){
 				arr = [];
 				for(j=0;j<num_layers_width;j++){
