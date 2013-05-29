@@ -253,7 +253,7 @@ jQuery(document).ready(function($){
 					right_path_type = this.blocks[i][j+1];
 					bottom_path_type = this.blocks[i+1][j];
 					left_path_type = this.blocks[i][j-1];
-					
+
 					top_allowed = top_path_type === 12 ? take_all : this.allowed_paths_config[top_path_type]['top'];
 					right_allowed = right_path_type === 12 ? take_all : this.allowed_paths_config[right_path_type]['right'];
 					bottom_allowed = bottom_path_type === 12 ? take_all : this.allowed_paths_config[bottom_path_type]['bottom'];
@@ -272,6 +272,7 @@ jQuery(document).ready(function($){
 					this.draw_block(path_picked,'block'+ i + '_' + j,'replace');
 				}
 			}
+			
 		},
 		build_map : function(){
 			var num_layers_width = this.num_blocks_width + 2,
