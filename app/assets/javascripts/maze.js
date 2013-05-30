@@ -73,97 +73,91 @@ jQuery(document).ready(function($){
 			// |||||||||
 			12 : [1,1,1,1,1,1,1,1,1]
 		},
-		paths_restriction : { // if that side is 0
+		boundary_allowed_paths : { // if that side is 0
 			'top' : ['2','3','6','8'],
 			'right' : ['3','4','5','9'],
 			'bottom' : ['1','4','6','10'],
 			'left' : ['1','2','5','7']
 		},
-		get_random : function(num){ // giving 4 will return 0 to 3
+		get_random_0_to_num : function(num){ // giving a num will return 0 to num
 			return Math.floor(Math.random()*num);
 		},
-		set_allowed_paths_config: function(){
-			var that = this,
+		set_compatible_paths_config: function(){
+			var paths = this.paths,
 				paths_config;
 
-			function get_path_config(path_type){
-				var paths = that.paths[path_type],
-					top = 1,
-					right = 5,
-					bottom = 7,
-					left = 3,
-					config = {};
-
-				config['top'] = paths[top] === 0 ? false : true;
-				config['right'] = paths[right] === 0 ? false : true;
-				config['bottom'] = paths[bottom] === 0 ? false : true;
-				config['left'] = paths[left] === 0 ? false : true;
-
-				return config;
-			}
-
-			function return_paths_config(){
-				var paths = that.paths,
-					paths_config = {}, 
+			function get_allowed_paths_config(){
+				var configs = {}, 
 					i;
+				function _get_config(path_type){
+					var path = paths[path_type],
+						top_pos = 1,
+						right_pos = 5,
+						bottom_pos = 7,
+						left_pos = 3,
+						config = {};
 
-				for(i in paths){
-					if(paths.hasOwnProperty(i)){
-						paths_config[i] = get_path_config(i);
-					}
-				}
-				return paths_config;
-			}
-
-			function return_allowed_paths_config(paths_config){
-				var paths = that.paths,
-					allowed_paths_config = {},
-					i,j,k;
-
-				function get_allowed_paths(path_type,paths_config){
-					var config = {
-							'top' : [],
-							'right' : [],
-							'bottom' : [],
-							'left' : []
-						},
-						path_config = paths_config[path_type],
-						top = path_config['bottom'] ? true : false,
-						right = path_config['left'] ? true : false;
-						bottom = path_config['top'] ? true : false;
-						left = path_config['right'] ? true : false;
-
-					function if_allowed(type){
-						var allowed_paths=[],
-							i;
-						for(i in paths_config){
-							if(paths_config.hasOwnProperty(i) && paths_config[i][type]){
-								allowed_paths.push(i);
-							}
-						}
-						return allowed_paths;
-					}
-
-					if(top) config['top'] = if_allowed('top');
-					if(right) config['right'] = if_allowed('right');
-					if(bottom) config['bottom'] = if_allowed('bottom');
-					if(left) config['left'] = if_allowed('left');
+					config['allowed_top'] = path[top_pos] === 0 ? false : true;
+					config['allowed_right'] = path[right_pos] === 0 ? false : true;
+					config['allowed_bottom'] = path[bottom_pos] === 0 ? false : true;
+					config['allowed_left'] = path[left_pos] === 0 ? false : true;
 
 					return config;
 				}
 
 				for(i in paths){
 					if(paths.hasOwnProperty(i)){
-						allowed_paths_config[i] = get_allowed_paths(i,paths_config);
+						configs[i] = _get_config(i);
 					}
 				}
-				return allowed_paths_config;
+				return configs;
+			}
+			function get_compatible_paths_config(paths_config){
+				var configs = {},
+					i;
+
+				function _get_compatible(path_config){
+					var config = {
+							'compatible_top' : [],
+							'compatible_right' : [],
+							'compatible_bottom' : [],
+							'compatible_left' : []
+						},
+						top = path_config['allowed_bottom'], 
+						right = path_config['allowed_left'],
+						bottom = path_config['allowed_top'],
+						left = path_config['allowed_right'];
+
+					function get_compatible_paths(allowed_type){
+						var compatible_paths=[],
+							i;
+						for(i in paths_config){
+							if(paths_config.hasOwnProperty(i) && paths_config[i][allowed_type]){
+								compatible_paths.push(i);
+							}
+						}
+						return compatible_paths;
+					}
+
+					if(top) config['compatible_top'] = get_compatible_paths('allowed_top');
+					if(right) config['compatible_right'] = get_compatible_paths('allowed_right');
+					if(bottom) config['compatible_bottom'] = get_compatible_paths('allowed_bottom');
+					if(left) config['compatible_left'] = get_compatible_paths('allowed_left');
+					return config;
+				}
+
+				for(i in paths){
+					if(paths.hasOwnProperty(i)){
+						configs[i] = _get_compatible(paths_config[i]);
+					}
+				}
+				return configs;
 			}
 
-			paths_config = return_paths_config();
-			this.allowed_paths_config = return_allowed_paths_config(paths_config);
+			paths_config = get_allowed_paths_config();
+			this.compatible_paths_config = get_compatible_paths_config(paths_config);
 		},
-		draw_block : function(path_type,id,type){
+		draw_block : function(path_type,id,type){ // function that draw block to the html
 			var container = $('<div id=' + id +' class="maze-modules-container"></div>'),
 				paths = this.paths[path_type],
 				path = '<div class="maze-module maze-path"></div>',
@@ -204,20 +198,24 @@ jQuery(document).ready(function($){
 		draw_map_to_blocks : function(){
 			var num_layers_width = this.num_blocks_width + 2,
 				num_layers_height = this.num_blocks_height + 2,
-				top_path_type,
-				right_path_type,
-				bottom_path_type,
-				left_path_type,
-				top_allowed,
-				right_allowed,
-				bottom_allowed,
-				left_allowed,
-				allowed_path_arr,
-				take_all = ['0','1','2','3','4','5','6','7','8','9','10','11'],
-				that = this,
+				first_half, second_half,
+				top_path_type, top_compatible,
+				right_path_type, right_compatible,
+				bottom_path_type, bottom_compatible,
+				left_path_type, left_compatible,
+				compatible_paths_arr,
+				take_all = ['1','2','3','4','5','6','7','8','9','10','11'],
 				random_picked,
 				path_picked,
-				i,j;
+				that = this,
+				i,j,k;
+
+			if(num_layers_height % 2 === 0){ // is even number
+				first_half = num_layers_height/2;
+			} else {
+				first_half = (num_layers_height+1)/2;
+			}
+			second_half = num_layers_height - first_half;
 
 			function get_intersects(){
 				var arr = [],
@@ -247,32 +245,58 @@ jQuery(document).ready(function($){
 				return intersects_arr;
 			}
 
-			for(i=1;i<num_layers_height-1;i++){
+			function biasify(arr){
+				// double 7,8,9,10,11
+				var newArr = [],
+					val,
+					i;
+				for(i=0;i<arr.length;i++){
+					val = arr[i];
+					if(val === '7' || val === '8' || val === '9' || val === '10' || val === '11'){
+						newArr.push(val);
+						newArr.push(val);
+					}
+					newArr.push(val);
+				}
+				return newArr;
+			}
+
+			function loop_helper(i,j){
+				top_path_type = that.blocks[i-1][j];
+				right_path_type = that.blocks[i][j+1];
+				bottom_path_type = that.blocks[i+1][j];
+				left_path_type = that.blocks[i][j-1];
+
+				top_compatible = top_path_type === 12 ? take_all : that.compatible_paths_config[top_path_type]['compatible_top'];
+				right_compatible = right_path_type === 12 ? take_all : that.compatible_paths_config[right_path_type]['compatible_right'];
+				bottom_compatible = bottom_path_type === 12 ? take_all : that.compatible_paths_config[bottom_path_type]['compatible_bottom'];
+				left_compatible = left_path_type === 12 ? take_all : that.compatible_paths_config[left_path_type]['compatible_left'];
+
+				if(top_compatible.length === 0) top_compatible = that.boundary_allowed_paths['top'];
+				if(right_compatible.length === 0) right_compatible = that.boundary_allowed_paths['right'];
+				if(bottom_compatible.length === 0) bottom_compatible = that.boundary_allowed_paths['bottom'];
+				if(left_compatible.length === 0) left_compatible = that.boundary_allowed_paths['left'];
+				
+				compatible_paths_arr = get_intersects(top_compatible,right_compatible,bottom_compatible,left_compatible);
+				compatible_paths_arr = biasify(compatible_paths_arr);
+
+				random_picked = that.get_random_0_to_num(compatible_paths_arr.length);
+				path_picked = compatible_paths_arr.length === 0 ? 0 : compatible_paths_arr[random_picked];
+				that.blocks[i][j] = parseInt(path_picked);
+
+				that.draw_block(path_picked,'block'+ i + '_' + j,'replace');
+			}
+
+			for(i=1;i<first_half-1;i++){
 				for(j=1;j<num_layers_width-1;j++){
-					top_path_type = this.blocks[i-1][j];
-					right_path_type = this.blocks[i][j+1];
-					bottom_path_type = this.blocks[i+1][j];
-					left_path_type = this.blocks[i][j-1];
-
-					top_allowed = top_path_type === 12 ? take_all : this.allowed_paths_config[top_path_type]['top'];
-					right_allowed = right_path_type === 12 ? take_all : this.allowed_paths_config[right_path_type]['right'];
-					bottom_allowed = bottom_path_type === 12 ? take_all : this.allowed_paths_config[bottom_path_type]['bottom'];
-					left_allowed = left_path_type === 12 ? take_all : this.allowed_paths_config[left_path_type]['left'];
-
-					if(top_allowed.length === 0) top_allowed = this.paths_restriction['top'];
-					if(right_allowed.length === 0) right_allowed = this.paths_restriction['right'];
-					if(bottom_allowed.length === 0) bottom_allowed = this.paths_restriction['bottom'];
-					if(left_allowed.length === 0) left_allowed = this.paths_restriction['left'];
-					
-					allowed_path_arr = get_intersects(top_allowed,right_allowed,bottom_allowed,left_allowed);
-					random_picked = this.get_random(allowed_path_arr.length);
-					path_picked = allowed_path_arr.length === 0 ? 0 : allowed_path_arr[random_picked];
-					this.blocks[i][j] = parseInt(path_picked);
-
-					this.draw_block(path_picked,'block'+ i + '_' + j,'replace');
+					loop_helper(i,j);
 				}
 			}
-			
+			for(k=(num_layers_height-2);k>=i;k--){
+				for(j=num_layers_width-2;j>0;j--){
+					loop_helper(k,j);
+				}
+			}
 		},
 		build_map : function(){
 			var num_layers_width = this.num_blocks_width + 2,
@@ -305,7 +329,7 @@ jQuery(document).ready(function($){
 			this.num_blocks_height = parseInt((spec.num_blocks_height > 0 && spec.num_blocks_height < 36) ? spec.num_blocks_height : 10); // number of blocks on the height side
 			
 			this.clear(); // clear main container (remove maze)
-			this.set_allowed_paths_config(); // get allowed paths like path 1 allows combination with path 1,2,4,6,8 etc... example -> numbers are inaccurate
+			this.set_compatible_paths_config(); // get allowed paths like path 1 allows combination with path 1,2,4,6,8 etc... example -> numbers are inaccurate
 			this.build_map(); // build map in memory then use map to draw
 			this.draw_map_to_boundary(); // draw the boundary
 			this.draw_map_to_blocks(); // draw map
