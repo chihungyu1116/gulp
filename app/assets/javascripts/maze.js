@@ -156,6 +156,8 @@ jQuery(document).ready(function($){
 
 			paths_config = get_allowed_paths_config();
 			this.compatible_paths_config = get_compatible_paths_config(paths_config);
+
+			console.log(this.compatible_paths_config);
 		},
 		draw_block : function(path_type,id,type){ // function that draw block to the html
 			var container = $('<div id=' + id +' class="maze-modules-container"></div>'),
