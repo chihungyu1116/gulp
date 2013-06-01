@@ -156,8 +156,6 @@ jQuery(document).ready(function($){
 
 			paths_config = get_allowed_paths_config();
 			this.compatible_paths_config = get_compatible_paths_config(paths_config);
-
-			console.log(this.compatible_paths_config);
 		},
 		draw_block : function(path_type,id,type){ // function that draw block to the html
 			var container = $('<div id=' + id +' class="maze-modules-container"></div>'),
@@ -284,6 +282,7 @@ jQuery(document).ready(function($){
 
 				random_picked = that.get_random_0_to_num(compatible_paths_arr.length);
 				path_picked = compatible_paths_arr.length === 0 ? 0 : compatible_paths_arr[random_picked];
+
 				that.blocks[i][j] = parseInt(path_picked);
 
 				that.draw_block(path_picked,'block'+ i + '_' + j,'replace');
