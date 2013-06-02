@@ -5,7 +5,10 @@
 		.maze-path {background:#fff;}
 		.maze-no-path {background:#2b2b2b;}
 
-		#maze_button {padding:10px; margin-bottom:20px; border:1px solid #373737; cursor:pointer;}
+		.maze_button_container {width:100px;}
+		#maze_button {padding:10px; margin-bottom:20px; border:1px solid #373737; cursor:pointer; background:#2b2b2b; color:#fff; box-shadow: 2px 2px 4px #111; -moz-box-shadow: 2px 2px 4px #111; -webkit-box-shadow: 2px 2px 4px #111;}
+
+		#maze_button:hover { margin:1px 1px 19px 0; box-shadow: 1px 1px 3px #111; -moz-box-shadow: 1px 1px 3px #111; -webkit-box-shadow: 1px 1px 3px #111;}
 
 		.inputs {padding:0 10px; width:80px; height:40px; margin:0 20px;}
 		.multi {line-height:40px; font-size:26px;}
@@ -38,13 +41,17 @@
 <% end %>
 
 
-<h1>Random Path Maze Generator</h1>
-<div id="maze_button" class="col rnd-s">
-	change
-</div><input id="width_input" type="text" class="col inputs" value="35"><span class="col multi">X</span><input id="height_input" type="text" class="col inputs" value="35">
+<h1 class="post-title">Random Path Maze Generator</h1>
+<div class="maze_button_container col">
+	<div id="maze_button" class="col rnd-s">
+		change
+	</div>
+</div>
+<input id="width_input" type="text" class="col inputs" value="35"><span class="col multi">X</span><input id="height_input" type="text" class="col inputs" value="35">
 
 <div class="explan">Values for width and height must be between 1 and 35.</div>
 <div id="maze"></div>
+<div class="post-end">(end)</div>
 
 
 

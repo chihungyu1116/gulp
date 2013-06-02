@@ -219,12 +219,13 @@ jQuery(document).ready(function($){
 
 			function get_intersects(){
 				var arr = [],
+					arg_len = arguments.length,
 					count = 1,
 					current = "",
 					intersects_arr = [],
 					i;
 
-				for(i=0; i<arguments.length; i++){
+				for(i=0; i<arg_len; i++){
 					arr = arr.concat(arguments[i]);
 				}
 				arr = arr.sort(function(a,b){
@@ -238,7 +239,7 @@ jQuery(document).ready(function($){
 					} else {
 						count++;
 					}
-					if(count === 4){
+					if(count === arg_len){
 						intersects_arr.push(current);
 					}
 				}
