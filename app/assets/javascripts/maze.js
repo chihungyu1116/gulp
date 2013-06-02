@@ -327,8 +327,8 @@ jQuery(document).ready(function($){
 			this.map_id = spec.map_id;
 			this.block_width = 30;
 			this.block_height = 30;
-			this.num_blocks_width = parseInt((spec.num_blocks_width > 0 && spec.num_blocks_width < 1000) ? spec.num_blocks_width : 10); // number of blocks on the width side
-			this.num_blocks_height = parseInt((spec.num_blocks_height > 0 && spec.num_blocks_height < 1000) ? spec.num_blocks_height : 10); // number of blocks on the height side
+			this.num_blocks_width = parseInt((spec.num_blocks_width > 0 && spec.num_blocks_width < 100000) ? spec.num_blocks_width : 10); // number of blocks on the width side
+			this.num_blocks_height = parseInt((spec.num_blocks_height > 0 && spec.num_blocks_height < 100000) ? spec.num_blocks_height : 10); // number of blocks on the height side
 			
 			this.clear(); // clear main container (remove maze)
 			this.set_compatible_paths_config(); // get allowed paths like path 1 allows combination with path 1,2,4,6,8 etc... example -> numbers are inaccurate
