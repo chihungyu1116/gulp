@@ -34,8 +34,7 @@
 		    widthOffset : 20
 	    });    
 
-	    var facebook_config = [ {start: 30, end: 150}, {start: 540, end: 600}, {start: 560, end: 620}, {start: 610, end: 670}
-	        , {start: 310, end: 470}, {start: 510, end: 600}, {start: 210, end: 250} ];
+	    var facebook_config = [{"start":30,"end":150,"id":0},{"start":540,"end":640,"id":4},{"start":560,"end":620,"id":5},{"start":610,"end":670,"id":6},{"start":310,"end":470,"id":2},{"start":350,"end":600,"id":3},{"start":210,"end":650,"id":1},{"start":300,"end":350},{"start":120,"end":370}];
 	    layOutDay(facebook_config);
 
 	    $('#FB_input_val').val(JSON.stringify(facebook_config));
@@ -49,7 +48,7 @@
 	    	$('.fb-read-me').toggleClass('active');
 	    });
 	});
-  	 
+
   	</script>
 <% end %>
 <div class="fb_explanation">A perfect working and tested solution <span class="fb-cross-browser">(cross browser, ie8 supports)</span> done by me for facbook interview. To read the specification <span class="fb-click-here">click here.</span> or see it on my github <a target="_blank" class="link-external" href="https://github.com/chihungyu1116/facebook_calendar_puzzle">facebook puzzle</a>.</div>
