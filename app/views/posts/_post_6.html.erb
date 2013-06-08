@@ -2,13 +2,20 @@
 	<style>
 	</style>
 <% end %>
+
 <% content_for :scripts do %>
+	<%= javascript_include_tag 'sphere' %>
+
+	<script>
+		var sphere = Sphere.init({
+			canvas : '#Canvas',
+			radius : 301,
+			density : 1,
+			color: ['#1f5d8e','#333','#fff']
+		});
+
+	</script>
 <% end %>
 
-<div class="ground">
-	<div class="house">
-
-
-
-	</div>
-</div>
+<h1 class="post-title">Create Sphere with CSS and Javascript</h1>
+<div id="Canvas"></div>
