@@ -46,31 +46,32 @@ var Sphere = (function(){
 				'height' : this.radius,
 				'top' : this.neg_center,
 				'transform' : 'rotate(' + i + 'deg)',
-				'transform-style' : 'preserve-3d'
+				'transform-style' : 'preserve-3d',
+				'background' : this.stick_color
 			});
 
 			$sphere_stick.find('.stick_face_top').css({
 				'position' : 'absolute',
 				'width' : this.stick_face_radius,
 				'height' :this.stick_face_radius,
-				'top' : 0,
+				'top' : this.neg_stick_face_radius_center,
 				'left' : this.stick_face_radius_center,
 				'transform' : 'rotateX(90deg)',
 				'background' : color_picked,
 				'border-radius' : '50%',
-				'opacity' : '0.75'
+				'opacity' : this.transparency
 			});
 
 			$sphere_stick.find('.stick_face_bottom').css({
 				'position' : 'absolute',
 				'width' : this.stick_face_radius,
 				'height' : this.stick_face_radius,
-				'bottom' : 0,
+				'bottom' : this.neg_stick_face_radius_center,
 				'left' : this.stick_face_radius_center,
-				'transform' : 'rotateX(-90deg)',
+				'transform' : 'rotateX(90deg)',
 				'background' : color_picked,
 				'border-radius' : '50%',
-				'opacity' : '0.75'
+				'opacity' : this.transparency
 			});
 			$container.append($sphere_stick);
 		},
@@ -104,15 +105,43 @@ var Sphere = (function(){
 			this.create_sphere_container();
 			this.create_sphere_pivot();
 			this.create_sphere_plates();
+
+			this.$canvas.html('');
 			this.$canvas.append(this.$sphere_container);
+		},
+		rotate : function(direction){
+			if(direction === 'left'){
+				this.degreeY--;
+			} else if(direction === 'up'){
+				this.degreeX++;
+			} else if(direction === 'right'){
+				this.degreeY++
+			} else if(direction === 'down'){
+				this.degreeX--;
+			}
+			$('#sphere_container').css({
+				'transform' : 'rotateX(' + this.degreeX + 'deg) rotateY(' + this.degreeY + 'deg)'
+			});
+		},
+		reset : function(){
+			this.degreeY=0;
+			this.degreeX=0;
+
+			$('#sphere_container').css({
+				'transform' : 'rotateX(' + this.degreeX + 'deg) rotateY(' + this.degreeY + 'deg)'
+			});
 		}
 	}
 	return {
 		init : function(spec){
 			var that = Object.create(self),
-				density_chart = [0.025,0.05,0.075,0.1,0.125],
+				density_chart = [0.02,0.04,0.06,0.08,0.1],
 				stick_face_radius;
-			
+
+
+			that.degreeX = 0;
+			that.degreeY = 0;
+
 			that.canvas= spec.canvas;
 
 			// take only odd number width and height --> for a perfectly centered pivot since pivot is 1 px 
@@ -125,7 +154,11 @@ var Sphere = (function(){
 
 			that.stick_face_radius = (stick_face_radius % 2 === 0) ? (stick_face_radius + 1) : stick_face_radius
 			that.stick_face_radius_center = (that.stick_face_radius-1)/2;
+			that.neg_stick_face_radius_center = ~that.stick_face_radius_center + 1;
+			
 			that.color = spec.color;
+			that.stick_color = spec.stick_color;
+			this.transparency = spec.transparency || 1
 
 			that.create();
 			return that;

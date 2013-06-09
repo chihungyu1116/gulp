@@ -1,5 +1,54 @@
 <% content_for :style do %>
 	<style>
+	.sphere_panel {margin-bottom:40px;}
+	.sphere_panel input, .sphere_panel select {margin-right:20px;}
+	.sphere_panel input {padding:0 10px; height:30px;}
+	.sphere_panel label {display:block; font-size:16px; line-height:30px; color:#212121;}
+	.sphere_submit {margin-top:20px; padding:10px; color:#fff; background:#1f5d8e; cursor:pointer; box-shadow:1px 1px 3px #2f6d9e;}
+	.sphere_submit:hover {margin:21px 0 0 1px; box-shadow:0 0 2px #3f7dae;}
+
+	.control_panel .cool_btn {margin:0 15px 40px 0; cursor:pointer; text-align:center; border:1px solid #777; width:75px; padding:10px 0;}
+
+	#sphere_container.active {animation: rotate 40s linear infinite; -moz-animation: rotate 40s linear infinite; -webkit-animation: rotate 40s linear infinite;}
+
+	@keyframes rotate {
+		0% {transform:rotateX(0deg) rotateY(0deg);}
+		10% {transform:rotateX(105deg) rotateY(75deg);}
+		20% {transform:rotateX(55deg) rotateY(25deg);}
+		30% {transform:rotateX(170deg) rotateY(80deg);}
+		40% {transform:rotateX(220deg) rotateY(180deg);}
+		50% {transform:rotateX(290deg) rotateY(280deg);}
+		60% {transform:rotateX(55deg) rotateY(200deg);}
+		70% {transform:rotateX(55deg) rotateY(95deg);}
+		80% {transform:rotateX(60deg) rotateY(50deg);}
+		100% {transform:rotateX(0deg) rotateY(0deg);}
+	}
+
+	@-moz-keyframes rotate {
+		0% {-moz-transform:rotateX(0deg) rotateY(0deg);}
+		10% {-moz-transform:rotateX(105deg) rotateY(75deg);}
+		20% {-moz-transform:rotateX(55deg) rotateY(25deg);}
+		30% {-moz-transform:rotateX(170deg) rotateY(80deg);}
+		40% {-moz-transform:rotateX(220deg) rotateY(180deg);}
+		50% {-moz-transform:rotateX(290deg) rotateY(280deg);}
+		60% {-moz-transform:rotateX(55deg) rotateY(200deg);}
+		70% {-moz-transform:rotateX(55deg) rotateY(95deg);}
+		80% {-moz-transform:rotateX(60deg) rotateY(50deg);}
+		100% {-moz-transform:rotateX(0deg) rotateY(0deg);}
+	}
+
+	@-webkit-keyframes rotate {
+		0% {-webkit-transform:rotateX(0deg) rotateY(0deg);}
+		10% {-webkit-transform:rotateX(105deg) rotateY(75deg);}
+		20% {-webkit-transform:rotateX(55deg) rotateY(25deg);}
+		30% {-webkit-transform:rotateX(170deg) rotateY(80deg);}
+		40% {-webkit-transform:rotateX(220deg) rotateY(180deg);}
+		50% {-webkit-transform:rotateX(290deg) rotateY(280deg);}
+		60% {-webkit-transform:rotateX(55deg) rotateY(200deg);}
+		70% {-webkit-transform:rotateX(55deg) rotateY(95deg);}
+		80% {-webkit-transform:rotateX(60deg) rotateY(50deg);}
+		100% {-webkit-transform:rotateX(0deg) rotateY(0deg);}
+	}
 	</style>
 <% end %>
 
@@ -7,15 +56,129 @@
 	<%= javascript_include_tag 'sphere' %>
 
 	<script>
+	jQuery(function($){
 		var sphere = Sphere.init({
 			canvas : '#Canvas',
 			radius : 301,
 			density : 1,
-			color: ['#1f5d8e','#333','#fff']
+			color: ['yellow','#f05','blue'],
+			stick_color : 'transparent'
+
 		});
 
+
+		$('#SphereSubmit').click(function(){
+			var radius = $('#SphereRadius').val(),
+				colors = $('#SphereColors').val(),
+				density = $('#SphereDensity').val(),
+				stick_color = $('#StickColor').val();
+
+			radius = parseInt(radius);
+			colors = colors.split(',');
+			density = parseInt(density);
+			stick_color = stick_color || 'transparent';
+
+
+			console.log(radius,colors,density,stick_color);
+			sphere = Sphere.init({
+				canvas : '#Canvas',
+				radius : radius,
+				density : density,
+				color: colors,
+				stick_color : stick_color
+			});
+
+
+			$('#SpherePlay').html('play')
+		});
+
+
+		$('#SphereLeft').click(function(){
+			sphere.rotate('left');
+		})
+		$('#SphereUp').click(function(){
+			sphere.rotate('up');
+		});
+		$('#SphereRight').click(function(){
+			sphere.rotate('right');
+		});
+		$('#SphereDown').click(function(){
+			sphere.rotate('down');
+		});
+
+
+		$(document).keydown(function(evt){
+			switch(evt.keyCode){
+				case 37:
+					sphere.rotate('left');
+					break;
+				case 38:
+					sphere.rotate('up');
+					break;
+				case 39:
+					sphere.rotate('right');
+					break;
+				case 40:
+					sphere.rotate('down');
+					break;
+				case 27:
+					sphere.reset();
+					break;
+				default:
+					break;
+			};
+		});
+
+		$('#SpherePlay').click(function(){
+			var val = $(this).html();
+
+			if(val.match(/stop/i)){
+				$(this).html('play');
+			} else {
+				$(this).html('stop');
+			}
+			$('#sphere_container').toggleClass('active');
+		});
+	});
 	</script>
 <% end %>
 
 <h1 class="post-title">Create Sphere with CSS and Javascript</h1>
+
+<div class="sphere_panel">
+<div class="sphere_radius col">
+	<label name="sphere_radius">Dimension</label>
+	<input id="SphereRadius" name="sphere_radius" placeholder="sphere radius" value="301">
+</div><div class="sphere_color col">
+	<label name="sphere_color">Colors</label>
+	<input id="SphereColors" name="sphere_color" placeholder="colors" value="yellow,#f05,blue">
+</div><div class="sphere_density col">
+	<label name="sphere_density">Density</label>
+	<select id="SphereDensity" name="sphere_density">
+		<option value='1'>1</option>
+		<option value='2'>2</option>
+		<option value='3'>3</option>
+		<option value='4'>4</option>
+		<option value='5'>5</option>
+	</select>
+</div><div class="sphere_stick col">
+	<label name="sphere_stick_color">Stick Color</label>
+	<input id="StickColor" name="sphere_stick_color">
+</div><div id="SphereSubmit" class="sphere_submit col">Submit</div>
+</div>
+
+<div class="control_panel">
+	<div id="SphereLeft" class="left cool_btn col bbox">
+		left
+	</div><div id="SphereUp" class="up cool_btn col bbox">
+		up
+	</div><div id="SphereDown" class="down cool_btn col bbox">
+		down
+	</div><div id="SphereRight" class="right cool_btn col bbox">
+		right
+	</div><div id="SpherePlay" class="play cool_btn col bbox">
+		play
+	</div>
+</div>
+
 <div id="Canvas"></div>
