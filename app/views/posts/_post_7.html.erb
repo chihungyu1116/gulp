@@ -1,0 +1,112 @@
+<% content_for :style do %>
+	<style>
+	</style>
+<% end %>
+<%= render partial: 'share/app_blog_title', locals: { title:'About' }  %>
+	
+<h1 class="post-title">Javascript Performance Tests</h1>
+
+
+
+
+<ol>
+	<li>
+		<h2 class="point-title">Check if Phone Number (Integer) is 10 digits</h2>
+		<p>Assume the value we get is an Integer</p>
+		<pre>
+<code lang="javascript"> 
+  var phone_number = 1234567890;  
+  var if_10_digits = false;
+  // to check if the phone number is 10 digits we can 
+  // 1) convert phone_number to string then check if length equal to 10
+
+  phone_number = phone_number + '';
+  if_10_digits = (phone_number.length === 10);
+
+
+  // 2) do integer comparison
+
+  phone_number = 1234567890;  
+  if_10_digits = (phone_number > 99999999 && phone_number < 1000000000);
+
+  // 3) regex
+
+  phone_number = 1234567890;  
+  phone_number = phone_number + '';
+  if_10_digits = phone_number.match(/\d{10}/) ? true : false;
+</code>
+		</pre>
+
+		<p>The second approach is the fastest in JsPerf. It's about 25% faster than the first approach in Chrome. <a href="http://jsperf.com/chihung-test-negate" target="_blank" class="link-external">jsPerf Result</a></p>
+	</li>
+	<li>
+		<h2 class="point-title">Bitwise Integer Swap</h2>
+		<p>Assume we have the following setting</p>
+		<pre>
+<code lang="javascript"> 
+  var x = 10;
+  var y = 20;
+
+  // to swap x and y values
+  // 1)
+  var temp = x;
+  x = y;
+  y = x;
+
+
+  // or we can use bitwise operator xor
+
+  x = 10;
+  y = 20;
+
+  x^=y;
+  y^=x;
+  x^=y;
+</code>
+		</pre>
+
+
+		<p>The gain over using xor to swap values is very small but if iterating the procedure many many times, it has about 10% performance gain over normal swap in Chrome. <a href="http://jsperf.com/bitwise-swap-test" target="_blank" class="link-external">jsPerf Result</a></p>
+	</li>
+
+	<li>
+		<h2 class="point-title">Bitwise Mutiplication for multiple of 2</h2>
+		<p>Assume we have the following setting</p>
+		<pre>
+<code lang="javascript"> 
+
+  // when multiple number with value of multiple of 2
+  // we can
+  var x = 1000;
+  x *= 2;
+  x *= 4;
+  x *= 8;
+  x *= 16;
+  x *= 32;
+  x *= 64;
+
+
+// or we can use bitwise operator
+
+  var x = 1000;
+  x <<= 1;
+  x <<= 2;
+  x <<= 3;
+  x <<= 4;
+  x <<= 5;
+  x <<= 6;
+</code>
+		</pre>
+
+		<p>The result is pretty much the same in Chrome. <a href="http://jsperf.com/test-for-twos-mutiple" target="_blank" class="link-external">jsPerf Result</a></p>
+
+
+
+
+
+	</li>
+
+
+
+</ol>
+<div class="post-end">(end)</div>
