@@ -62,8 +62,8 @@
 			radius : 301,
 			density : 1,
 			color: ['yellow','#f05','blue'],
-			stick_color : 'transparent'
-
+			stick_color : 'transparent',
+			transparency : 0.7
 		});
 
 
@@ -71,13 +71,15 @@
 			var radius = $('#SphereRadius').val(),
 				colors = $('#SphereColors').val(),
 				density = $('#SphereDensity').val(),
-				stick_color = $('#StickColor').val();
+				stick_color = $('#StickColor').val(),
+				transparency = $('#Transparency').val();
 
 			radius = parseInt(radius);
 			colors = colors.split(',');
 			density = parseInt(density);
 			stick_color = stick_color || 'transparent';
 
+			transparency = parseFloat(transparency);
 
 			console.log(radius,colors,density,stick_color);
 			sphere = Sphere.init({
@@ -85,7 +87,8 @@
 				radius : radius,
 				density : density,
 				color: colors,
-				stick_color : stick_color
+				stick_color : stick_color,
+				transparency : transparency
 			});
 
 
@@ -164,6 +167,9 @@
 </div><div class="sphere_stick col">
 	<label name="sphere_stick_color">Stick Color</label>
 	<input id="StickColor" name="sphere_stick_color">
+</div><div class="sphere_transparency col">
+	<label name="sphere_stick_transparency">Transparency</label>
+	<input id="Transparency" value='0.7'>
 </div><div id="SphereSubmit" class="sphere_submit col">Submit</div>
 </div>
 

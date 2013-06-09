@@ -158,7 +158,7 @@ var Sphere = (function(){
 			
 			that.color = spec.color;
 			that.stick_color = spec.stick_color;
-			this.transparency = spec.transparency || 1
+			that.transparency = spec.transparency || 1
 
 			that.create();
 			return that;
