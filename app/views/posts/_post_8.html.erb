@@ -1,0 +1,73 @@
+<% content_for :style do %>
+	<style>
+		.container,.container-1,.container-2 {height:100px; background:#1f5d8e;}
+		.text {line-height:100px; color:#fff;}
+		.text-1 {color:#fff;}
+		.text-2 {color:#fff;}
+		.container-2:after {content:''; display:inline-block; height:100%; vertical-align:middle;}
+		.text-2 {display:inline-block;}
+	</style>
+<% end %>
+<%= render partial: 'share/app_blog_title', locals: { title:'About' }  %>
+	
+<h1 class="post-title">Vertical Align Like a Ninja</h1>
+
+<ol>
+	<li>
+		<p>How to do a perfect vertical align of text or anything is a challenge to new developer, one way to do it is to use <span class="t-warning">line-height</span> where we align the line-height of the text equal to the container's <span class="t-warning">height</span>.
+		<p>Assume the text is inline a container of <span class="t-warning">height 100px</span><p>
+	<pre>
+<code lang="css">
+&lt;style&gt;
+  .container {
+    height:100px;
+  }
+  .text {
+    line-height:100px;
+  }
+&lt;style&gt;
+</code>
+		</pre>
+		<p>By aligning text with <span class="t-warning">line-height 100px</span>. We get the text vertical align middle</p>
+		<div class="html-demo-s">
+			<div class="container">
+				<div class="text">Teehee I am in the middle</div>
+			</div>
+		</div>
+
+		<p>Or we can use table! (yuck ... doh)</p>
+		<div class="html-demo-s">
+			<table class="container-1">
+				<td class="text-1">Teehee I am in the middle</td>
+			</table>
+		</div>
+
+		<p>Use line-height require knowing the height of the container and use table is just plain bad.</p>
+			
+		<p>This is a new way I found for vertical aligning things in the container that has an unknown height  <span class="t-warning">after</span> or <span class="t-warning">before</span>. (container-2's <span class="t-warning">height</span> can be anything!)</p>
+		<pre>
+<code lang="css">
+&lt;style&gt;
+  .container-2 {
+    height:100px;
+  }
+  .container-2:after {
+    content:''; 
+    display:inline-block; 
+    height:100%; 
+    vertical-align:middle;
+  }
+  .text-2 {
+    display:inline-block;
+  }
+&lt;style&gt;
+</code>
+		</pre>	
+
+		<div class="html-demo-s">
+			<div class="container-2">
+				<div class="text-2">Teehee I am in the middle</div>
+			</div>
+		</div>
+		<p>Now you know how to vertical align like a ninja.</p>
+		<div class="post-end">(end)</div>
