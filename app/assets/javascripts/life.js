@@ -147,6 +147,9 @@ var Life = (function(){
 		setCellStatus : function(cell,status){
 			cell.status = status;
 		},
+		getCellReferenceFromMap : function(){
+
+		},
 		bindCell : function($cell,cell){
 			var cell_live_color = this.cell_live_color,
 				cell_empty_color = this.cell_empty_color,
