@@ -1,0 +1,47 @@
+* {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.btn {
+	cursor:pointer;
+	padding:10px 15px;
+	margin:10px 10px 0 3px;
+}
+.col {
+	float:left;
+}
+.cell {
+	float:left;
+	width:20px;
+	height:20px;
+	cursor:pointer;
+	-webkit-transition:background 0.25s ease;
+	-moz-transition:background 0.25s ease;
+	transition:background 0.25s ease;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.input-container {
+	margin-right:10px;
+}
+.game-control {
+	margin-bottom:20px;
+}
+.game-board {
+
+}
+label {
+	display:block;
+	font-size:13px;
+	padding-left:5px;
+}

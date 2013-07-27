@@ -1,0 +1,34 @@
+<% content_for :style do %>
+	<style>
+	</style>
+<% end %>	
+<h1 class="post-title">Game Of Life</h1>
+
+<a class='link-external' href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Game of Life Explanation on Wikipedia</a>
+<ol>
+  <li>Any live cell with fewer than two live neighbours dies, as if caused by under-population.</li>
+  <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
+  <li>Any live cell with more than three live neighbours dies, as if by overcrowding.</li>
+  <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+</ol>
+<p>
+  Simply Said:<br>
+  if neighbors number = 0 or 1 cell dies<br>
+  if neighbors number = 2 or 3 cell lives<br>
+  if neighbors number = 4, 5, 6, 7, 8 cell dies<br>
+  if previous died cell has 3 surrounding neighbor, it revives.<br>
+</p>
+
+<div id='life'></div>
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'life' %>
+    <script>
+      var control = Life.init({
+        container_id : '#life',
+        board_width : 20,
+        board_height : 20
+      });
+    </script>
+<% end %>
+
+<div class="post-end">(end)</div>
