@@ -147,7 +147,7 @@ var Life = (function(){
 		setCellStatus : function(cell,status){
 			cell.status = status;
 		},
-		getCellReferenceFromMap : function(){
+		getCellReferenceFromMap : function(cell_id){
 
 		},
 		bindCell : function($cell,cell){
