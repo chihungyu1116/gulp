@@ -2,7 +2,7 @@ var Life = (function(){
 	var self = {
 		setDefault : function(spec){
 			spec = spec || {};
-			this.game_speed = spec.game_speed || 1000;
+			this.game_speed = spec.game_speed || 500;
 			this.cell_dimension = 20;
 			this.container_id = spec.container_id;
 			this.control_id = spec.container_id + '_control';
