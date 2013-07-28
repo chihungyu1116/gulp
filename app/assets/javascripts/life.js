@@ -164,7 +164,7 @@ var Life = (function(){
 				}
 			});
 		},
-		bindAndSartBoard : function(){
+		bindBoard : function(){
 			var that = this,
 				cell_map = this.cell_map,
 				cell_arr, cell_id, cell_status, cell_color,
@@ -180,6 +180,9 @@ var Life = (function(){
 					that.bindCell($cell,cell);
 				});
 			}
+		},
+		bindControls : function(){
+			
 		}
 	}
 	return {
@@ -187,7 +190,8 @@ var Life = (function(){
 			var that = Object.create(self);
 			that.setDefault(spec);
 			that.createGame();
-			that.bindAndSartBoard();
+			that.bindBoard();
+			that.bindControls()
 		}
 	}
 }());
