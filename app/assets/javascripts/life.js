@@ -51,30 +51,30 @@ var Life = (function(){
 				if($control.length === 0){
 					control_str = [
 						'<div id="',control_id,'" class="game-control clearfix">',
+							// '<div class="clearfix">',
+							// 	'<div id="',control_id + '_width" class="input-container col">',
+							// 		'<label>Width</label>',
+							// 		'<input name="width">',
+							// 	'</div>',
+							// 	'<div id="',control_id + '_height" class="input-container col">',
+							// 		'<label>Height</label>',
+							// 		'<input name="height">',
+							// 	'</div>',
+							// 	'<div id="',control_id + '_cell_live_color" class="input-container col">',
+							// 		'<label>Live Cell Color</label>',
+							// 		'<input name="cell_live_color">',
+							// 	'</div>',
+							// 	'<div id="',control_id + '_cell_dead_color" class="input-container col">',
+							// 		'<label>Dead Cell Color</label>',
+							// 		'<input name="cell_dead_color">',
+							// 	'</div>',
+							// 	'<div id="',control_id + '_cell_empty_color" class="input-container col">',
+							// 		'<label>Empty Cell Color</label>',
+							// 		'<input name="cell_empty_color">',
+							// 	'</div>',
+							// '</div>',
 							'<div class="clearfix">',
-								'<div id="',control_id + '_width" class="input-container col">',
-									'<label>Width</label>',
-									'<input name="width">',
-								'</div>',
-								'<div id="',control_id + '_height" class="input-container col">',
-									'<label>Height</label>',
-									'<input name="height">',
-								'</div>',
-								'<div id="',control_id + '_cell_live_color" class="input-container col">',
-									'<label>Live Cell Color</label>',
-									'<input name="cell_live_color">',
-								'</div>',
-								'<div id="',control_id + '_cell_dead_color" class="input-container col">',
-									'<label>Dead Cell Color</label>',
-									'<input name="cell_dead_color">',
-								'</div>',
-								'<div id="',control_id + '_cell_empty_color" class="input-container col">',
-									'<label>Empty Cell Color</label>',
-									'<input name="cell_empty_color">',
-								'</div>',
-							'</div>',
-							'<div class="clearfix">',
-								'<div id="',control_id + '_set_btn" class="btn col">Set</div>',
+								// '<div id="',control_id + '_set_btn" class="btn col">Set</div>',
 								'<div id="',control_id + '_start_btn" class="btn col">Start</div>',
 								'<div id="',control_id + '_reset_btn" class="btn col">Reset</div>',
 							'</div>',
@@ -425,10 +425,10 @@ var Life = (function(){
 						}
 					}
 				}
-				if(cell_live_count > 2 && cell_live_count < 5){
+				if(cell_live_count > 2 && cell_live_count < 6){
 					cell.status_next = 'live';
 				} else {
-					cell.status_next = 'dead'
+					cell.status_next = 'empty'
 				}
 			}
 			$.each(cell_live_all,function(key,cell){
