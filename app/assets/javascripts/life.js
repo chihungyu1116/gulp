@@ -9,9 +9,8 @@ var Life = (function(){
 			this.board_id = spec.container_id + '_board';
 			this.board_width = spec.board_width || 30;
 			this.board_height = spec.board_height || 30;
-			this.cell_dead_color = spec.cell_dead_color || '#aaa';
+			this.cell_dead_color = spec.cell_dead_color || '#333';
 			this.cell_live_color = spec.cell_live_color || 'red';
-			this.cell_empty_color = spec.cell_empty_color || '#333';
 			this.cell_map = [];
 		},
 		resetGameBoard : function(){
@@ -26,10 +25,10 @@ var Life = (function(){
 				cell_arr = cell_map[index];
 				$.each(cell_arr,function(key,cell){
 					cell_id = cell.id;
-					cell.status = 'empty';
-					cell.status_next = 'empty';
+					cell.status = 'dead';
+					cell.status_next = 'dead';
 					$cell = $(cell_id);
-					that.setCellColor($cell,'empty');
+					that.setCellColor($cell,'dead');
 				});
 			}
 		},
@@ -51,30 +50,7 @@ var Life = (function(){
 				if($control.length === 0){
 					control_str = [
 						'<div id="',control_id,'" class="game-control clearfix">',
-							// '<div class="clearfix">',
-							// 	'<div id="',control_id + '_width" class="input-container col">',
-							// 		'<label>Width</label>',
-							// 		'<input name="width">',
-							// 	'</div>',
-							// 	'<div id="',control_id + '_height" class="input-container col">',
-							// 		'<label>Height</label>',
-							// 		'<input name="height">',
-							// 	'</div>',
-							// 	'<div id="',control_id + '_cell_live_color" class="input-container col">',
-							// 		'<label>Live Cell Color</label>',
-							// 		'<input name="cell_live_color">',
-							// 	'</div>',
-							// 	'<div id="',control_id + '_cell_dead_color" class="input-container col">',
-							// 		'<label>Dead Cell Color</label>',
-							// 		'<input name="cell_dead_color">',
-							// 	'</div>',
-							// 	'<div id="',control_id + '_cell_empty_color" class="input-container col">',
-							// 		'<label>Empty Cell Color</label>',
-							// 		'<input name="cell_empty_color">',
-							// 	'</div>',
-							// '</div>',
 							'<div class="clearfix">',
-								// '<div id="',control_id + '_set_btn" class="btn col">Set</div>',
 								'<div id="',control_id + '_start_btn" class="btn col">Start</div>',
 								'<div id="',control_id + '_reset_btn" class="btn col">Reset</div>',
 							'</div>',
@@ -111,8 +87,8 @@ var Life = (function(){
 							cell_id = 'cell_' + y + '_' + x;
 							cell_obj = {
 								id : '#' + cell_id,
-								status : 'empty',
-								status_next : 'empty',
+								status : 'dead',
+								status_next : 'dead',
 								neighbors : []
 							}
 							cell_arr.push(cell_obj);
@@ -155,14 +131,12 @@ var Life = (function(){
 		setCellColor : function($cell,cell_status){
 			var cell_live_color = this.cell_live_color,
 				cell_dead_color = this.cell_dead_color,
-				cell_empty_color = this.cell_empty_color,
 				cell_color;
 
-			if(cell_status === 'empty'){
-				cell_color = cell_empty_color;
-			} else if(cell_status === 'live'){
+			if(cell_status === 'live'){
 				cell_color = cell_live_color;
-			} else if(cell_status === 'dead'){
+			} 
+			if(cell_status === 'dead'){
 				cell_color = cell_dead_color;
 			}
 
@@ -298,16 +272,15 @@ var Life = (function(){
 		},
 		bindCell : function($cell,cell){
 			var cell_live_color = this.cell_live_color,
-				cell_empty_color = this.cell_empty_color,
 				that = this;
 			$cell.click(function(){
 				//[!!!] if game starts it shouldn't allow clicking
-				if(cell.status === 'empty'){
+				if(cell.status === 'dead'){
 					that.setCellColor($cell,'live');
 					that.setCellStatus(cell,'live');
 				} else if(cell.status === 'live'){
-					that.setCellColor($cell,'empty');
-					that.setCellStatus(cell,'empty');
+					that.setCellColor($cell,'dead');
+					that.setCellStatus(cell,'dead');
 				}
 			});
 		},
@@ -362,33 +335,7 @@ var Life = (function(){
 				cell_live_all = this.cell_live_all,
 				cell_dead_all = this.cell_dead_all,
 				index;
-			function randomPick(cell_arr){
-				var upper_bound = cell_arr.length,
-					index = Math.floor(Math.random()*1000)%upper_bound;
-				cell_arr[index].status_next = 'live';
-
-			}
-			function reproduce(cell){
-				var cell_neighbors = cell.neighbors,
-					cell_live_count = 0,
-					cell_neighbor,
-					cell_arr = [],
-					index;
-
-				for(index = 0; index < cell.neighbors.length; index++){
-					cell_neighbor = cell.neighbors[index];
-					if(cell_neighbor){
-						if(cell_neighbor.status !== 'live'){
-							cell_arr.push(cell_neighbor);
-						}
-					}
-				}
-				if(cell_arr.length > 0){
-					randomPick(cell_arr);
-				}
-			}
 			// apply the rule
-			// if cell dead cannot be revived, set it to status empty
 			function apply_live_cell_rules(cell){
 				var cell_neighbors = cell.neighbors,
 					cell_live_count = 0,
@@ -408,7 +355,6 @@ var Life = (function(){
 					cell.status_next = 'dead';
 				} else {
 					cell.status_next = 'live'
-					reproduce(cell);
 				}
 			}
 			function apply_dead_cell_rules(cell){
@@ -425,10 +371,10 @@ var Life = (function(){
 						}
 					}
 				}
-				if(cell_live_count > 2 && cell_live_count < 6){
+				if(cell_live_count === 3){
 					cell.status_next = 'live';
 				} else {
-					cell.status_next = 'empty'
+					cell.status_next = 'dead'
 				}
 			}
 			$.each(cell_live_all,function(key,cell){
@@ -461,7 +407,7 @@ var Life = (function(){
 					$cell = $(cell_id);
 					that.setCellColor($cell,cell_status);
 					cell.status = cell.status_next;
-					cell_status_next = 'empty';
+					cell_status_next = 'dead';
 				});
 			}
 		},
