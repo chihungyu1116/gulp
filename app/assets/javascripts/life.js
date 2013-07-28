@@ -362,21 +362,29 @@ var Life = (function(){
 				cell_live_all = this.cell_live_all,
 				cell_dead_all = this.cell_dead_all,
 				index;
+			function randomPick(cell_arr){
+				var upper_bound = cell_arr.length,
+					index = Math.floor(Math.random()*1000)%upper_bound;
+				cell_arr[index].status_next = 'live';
 
+			}
 			function reproduce(cell){
 				var cell_neighbors = cell.neighbors,
 					cell_live_count = 0,
 					cell_neighbor,
+					cell_arr = [],
 					index;
 
 				for(index = 0; index < cell.neighbors.length; index++){
 					cell_neighbor = cell.neighbors[index];
 					if(cell_neighbor){
 						if(cell_neighbor.status !== 'live'){
-							cell_neighbor.status_next = 'live';
-							break;
+							cell_arr.push(cell_neighbor);
 						}
 					}
+				}
+				if(cell_arr.length > 0){
+					randomPick(cell_arr);
 				}
 			}
 			// apply the rule
