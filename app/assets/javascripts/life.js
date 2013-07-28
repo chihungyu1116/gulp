@@ -2,6 +2,7 @@ var Life = (function(){
 	var self = {
 		setDefault : function(spec){
 			spec = spec || {};
+			this.game_speed = spec.game_speed || 1000;
 			this.cell_dimension = 20;
 			this.container_id = spec.container_id;
 			this.control_id = spec.container_id + '_control';
@@ -14,7 +15,22 @@ var Life = (function(){
 			this.cell_map = [];
 		},
 		resetGameBoard : function(){
-			
+			var that = this,
+				cell_map = this.cell_map,
+				cell_arr,
+				cell_id,
+				$cell,
+				index;
+
+			for(index = 0; index < cell_map.length; index++){
+				cell_arr = cell_map[index];
+				$.each(cell_arr,function(key,cell){
+					cell_id = cell.id;
+					cell.status = 'empty';
+					$cell = $(cell_id);
+					that.setCellColor($cell,'empty');
+				});
+			}
 		},
 		removeGameBoard : function(){
 			
@@ -56,9 +72,14 @@ var Life = (function(){
 									'<input name="cell_empty_color">',
 								'</div>',
 							'</div>',
-							'<div id="',control_id + '_set_btn" class="btn col">Set</div>',
-							'<div id="',control_id + '_submit_btn" class="btn col">Start</div>',
-							'<div id="',control_id + '_reset_btn" class="btn col">Reset</div>',
+							'<div class="clearfix">',
+								'<div id="',control_id + '_set_btn" class="btn col">Set</div>',
+								'<div id="',control_id + '_start_btn" class="btn col">Start</div>',
+								'<div id="',control_id + '_reset_btn" class="btn col">Reset</div>',
+							'</div>',
+							'<div class="game-score">',
+								'Your Off Springs Successfully Live For ' + '<span id="',control_id + '_score" class="score">0</span>' + ' Generations',
+							'</div>',
 						'</div>'
 					].join('');
 
@@ -89,7 +110,9 @@ var Life = (function(){
 							cell_id = 'cell_' + y + '_' + x;
 							cell_obj = {
 								id : '#' + cell_id,
-								status : 'empty'
+								status : 'empty',
+								status_next : 'empty',
+								neighbors : []
 							}
 							cell_arr.push(cell_obj);
 							board_str += getCellStr(cell_id);
@@ -147,14 +170,137 @@ var Life = (function(){
 		setCellStatus : function(cell,status){
 			cell.status = status;
 		},
-		getCellReferenceFromMap : function(cell_id){
+		getCellReference : function(cell_id){
+			var cell_map = this.cell_map,
+				cell_arr,
+				cell,
+				x,y;
 
+			for(x=0;x<cell_map.length;x++){
+				cell_arr = cell_map[x];
+				for(y=0;y<cell_arr.length;y++){
+					cell = cell_arr[y];
+					if(cell.id === cell_id){
+						return cell;
+					}
+				}
+			}
+		},
+		setCellNeighbors : function(cell,board_width,board_height){
+			var that = this,
+				cell_id = cell.id,
+				cell_arr,
+				cell_1_1,
+				cell_2_1,
+				cell_3_1,
+				cell_1_2,
+				cell_3_2,
+				cell_1_3,
+				cell_2_3,
+				cell_3_3,
+				x, y;
+
+			cell_id = cell_id.replace('#cell_','');
+			cell_arr = cell_id.split('_');
+			x = parseInt(cell_arr[0]);
+			y = parseInt(cell_arr[1]);
+
+			// if cell is 2_2 it should have neighbors like that
+			// 1_1 2_1 3_1
+			// 1_2 2_2 3_2
+			// 1_3 2_3 3_3
+			function get_cell_id_str(x,y){
+				return '#cell_' + x + '_' + y;
+			}
+			function get_cell_1_1(){
+				var pos_x = x - 1,
+					pos_y = y - 1,
+					id;
+				if(pos_x < 0 || pos_y < 0){return null;}
+				id = get_cell_id_str(pos_x,pos_y);
+				return that.getCellReference(id);
+			}
+			function get_cell_2_1(){
+				var pos_x = x,
+					pos_y = y - 1,
+					id;
+
+				if(pos_y < 0){return null;}
+				id = get_cell_id_str(pos_x,pos_y);
+				return that.getCellReference(id);
+			}
+			function get_cell_3_1(){
+				var pos_x = x + 1,
+					pos_y = y - 1,
+					id;
+				if(pos_x >= board_width || pos_y < 0) {return null;}
+				id = get_cell_id_str(pos_x,pos_y);
+				return that.getCellReference(id);
+			}
+			function get_cell_1_2(){
+				var pos_x = x - 1,
+					pos_y = y,
+					id;
+				if(pos_x < 0) {return null;}
+				id = get_cell_id_str(pos_x,pos_y);
+				return that.getCellReference(id);
+			}
+			function get_cell_3_2(){
+				var pos_x = x + 1,
+					pos_y = y,
+					id;
+				if(pos_x >= board_width) {return null;}
+				id = get_cell_id_str(pos_x,pos_y);
+				return that.getCellReference(id);
+			}
+			function get_cell_1_3(){
+				var pos_x = x - 1,
+					pos_y = y + 1,
+					id;
+				if(pos_x < 0 || pos_y >= board_height) {return null;}
+				id = get_cell_id_str(pos_x,pos_y);
+				return that.getCellReference(id);
+			}
+			function get_cell_2_3(){
+				var pos_x = x,
+					pos_y = y + 1,
+					id;
+				if(pos_y >= board_height) {return null;}
+				id = get_cell_id_str(pos_x,pos_y);
+				return that.getCellReference(id);
+			}
+			function get_cell_3_3(){
+				var pos_x = x + 1,
+					pos_y = y + 1,
+					id;
+				if(pos_x >= board_width || pos_y >= board_height) {return null;}
+				id = get_cell_id_str(pos_x,pos_y);
+				return that.getCellReference(id);
+			}
+			cell_1_1 = get_cell_1_1();
+			cell_2_1 = get_cell_2_1();
+			cell_3_1 = get_cell_3_1();
+			cell_1_2 = get_cell_1_2();
+			cell_3_2 = get_cell_3_2();
+			cell_1_3 = get_cell_1_3();
+			cell_2_3 = get_cell_2_3();
+			cell_3_3 = get_cell_3_3();
+
+			cell.neighbors.push(cell_1_1);
+			cell.neighbors.push(cell_2_1);
+			cell.neighbors.push(cell_3_1);
+			cell.neighbors.push(cell_1_2);
+			cell.neighbors.push(cell_3_2);
+			cell.neighbors.push(cell_1_3);
+			cell.neighbors.push(cell_2_3);
+			cell.neighbors.push(cell_3_3);
 		},
 		bindCell : function($cell,cell){
 			var cell_live_color = this.cell_live_color,
 				cell_empty_color = this.cell_empty_color,
 				that = this;
 			$cell.click(function(){
+				//[!!!] if game starts it shouldn't allow clicking
 				if(cell.status === 'empty'){
 					that.setCellColor($cell,'live');
 					that.setCellStatus(cell,'live');
@@ -166,6 +312,8 @@ var Life = (function(){
 		},
 		bindBoard : function(){
 			var that = this,
+				board_width = this.board_width,
+				board_height = this.board_height,
 				cell_map = this.cell_map,
 				cell_arr, cell_id, cell_status, cell_color,
 				$cell, index;
@@ -177,12 +325,167 @@ var Life = (function(){
 					cell_status = cell.status,
 					$cell = $(cell_id);
 					that.setCellColor($cell,cell_status);
+					that.setCellNeighbors(cell,board_width,board_height);
 					that.bindCell($cell,cell);
 				});
 			}
 		},
+		getAllCellsStatus : function(){
+			var that = this,
+				cell_map = this.cell_map,
+				cell_status,
+				cell_arr,
+				x,y;
+			this.cell_live_all = [];
+			this.cell_dead_all = [];
+
+			for(x=0;x<cell_map.length;x++){
+				cell_arr = cell_map[x];
+				$.each(cell_arr,function(key,cell){
+					cell_status = cell.status;
+					if(cell_status === 'live'){
+						that.cell_live_all.push(cell);
+					} else if(cell_status === 'dead'){
+						that.cell_dead_all.push(cell);
+					}
+				});
+			}
+
+			// if no live cell, game stop
+			if(this.cell_live_all.length === 0){
+				this.game_flag_run = false;
+			}
+		},
+		applyAllCellsRules : function(){
+			var that = this,
+				cell_live_all = this.cell_live_all,
+				cell_dead_all = this.cell_dead_all,
+				index;
+
+			function reproduce(cell){
+				var cell_neighbors = cell.neighbors,
+					cell_live_count = 0,
+					cell_neighbor,
+					index;
+
+				for(index = 0; index < cell.neighbors.length; index++){
+					cell_neighbor = cell.neighbors[index];
+					if(cell_neighbor){
+						if(cell_neighbor.status !== 'live'){
+							cell_neighbor.status_next = 'live';
+							break;
+						}
+					}
+				}
+			}
+			// apply the rule
+			// if cell dead cannot be revived, set it to status empty
+			function apply_live_cell_rules(cell){
+				var cell_neighbors = cell.neighbors,
+					cell_live_count = 0,
+					cell_neighbor,
+					index;
+
+				for(index = 0; index < cell.neighbors.length; index++){
+					cell_neighbor = cell.neighbors[index];
+					if(cell_neighbor){
+						if(cell_neighbor.status === 'live'){
+							cell_live_count++;
+						}
+					}
+				}
+
+				if(cell_live_count < 2 || cell_live_count > 3){
+					cell.status_next = 'dead';
+				} else {
+					cell.status_next = 'live'
+					reproduce(cell);
+				}
+			}
+			function apply_dead_cell_rules(cell){
+				var cell_neighbors = cell.neighbors,
+					cell_live_count = 0,
+					cell_neighbor,
+					index;
+
+				for(index = 0; index < cell.neighbors.length; index++){
+					cell_neighbor = cell.neighbors[index];
+					if(cell_neighbor){
+						if(cell_neighbor.status === 'live'){
+							cell_live_count++;
+						}
+					}
+				}
+				if(cell_live_count > 2 && cell_live_count < 5){
+					cell.status_next = 'live';
+				} else {
+					cell.status_next = 'dead'
+				}
+			}
+			$.each(cell_live_all,function(key,cell){
+				apply_live_cell_rules(cell);
+			});
+			$.each(cell_dead_all,function(key,cell){
+				apply_dead_cell_rules(cell);
+			});
+		},
+		updateScores : function(){
+			var control_id = this.control_id,
+				$score = $(control_id + '_score');
+
+			this.game_score++;
+			$score.html(this.game_score);
+		},
+		applyAllCellsStatus : function(){
+			var that = this,
+				cell_map = this.cell_map,
+				cell_arr,
+				cell_id,
+				cell_status,
+				$cell,
+				x,y;
+			for(x = 0; x < cell_map.length; x++){
+				cell_arr = cell_map[x];
+				$.each(cell_arr,function(key,cell){
+					cell_id = cell.id;
+					cell_status = cell.status_next;
+					$cell = $(cell_id);
+					that.setCellColor($cell,cell_status);
+					cell.status = cell.status_next;
+					cell_status_next = 'empty';
+				});
+			}
+		},
+		gameStart : function(){
+			var that = this,
+				game_speed = this.game_speed;
+
+			function gameTickFunction(){
+				that.getAllCellsStatus();
+				that.applyAllCellsRules();
+				setTimeout(function(){
+					if(that.game_flag_run){
+						that.applyAllCellsStatus();
+						that.updateScores();
+						gameTickFunction();
+					}
+				},game_speed);
+			}
+			gameTickFunction();
+		},
 		bindControls : function(){
-			
+			var id = this.control_id,
+				that = this;
+			$(id + '_start_btn').click(function(){
+				that.game_flag_run = true;
+				that.game_score = 0;
+				that.gameStart();
+			});
+			$(id + '_reset_btn').click(function(){
+				that.game_flag_run = false;
+				that.resetGameBoard();
+				that.game_score = 0;
+			});
 		}
 	}
 	return {
