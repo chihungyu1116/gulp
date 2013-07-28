@@ -27,6 +27,7 @@ var Life = (function(){
 				$.each(cell_arr,function(key,cell){
 					cell_id = cell.id;
 					cell.status = 'empty';
+					cell.status_next = 'empty';
 					$cell = $(cell_id);
 					that.setCellColor($cell,'empty');
 				});

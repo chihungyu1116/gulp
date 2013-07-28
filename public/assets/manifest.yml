@@ -9,8 +9,8 @@ facebook.js: facebook-cae9e530ebb39283025f3714a160f2e8.js
 facebook/index.js: facebook-cae9e530ebb39283025f3714a160f2e8.js
 layoutday.js: layoutday-cea1bbb3790c603a5c195143a5fbeb01.js
 layoutday/index.js: layoutday-cea1bbb3790c603a5c195143a5fbeb01.js
-life.js: life-9812c4353da71e6843180df728cd76ef.js
-life/index.js: life-9812c4353da71e6843180df728cd76ef.js
+life.js: life-1b94ceb79a62f3ae128b7dc1bd33aa38.js
+life/index.js: life-1b94ceb79a62f3ae128b7dc1bd33aa38.js
 maze.js: maze-0d8429ec5e9f6ced42d17f1ad3d7b9b9.js
 maze/index.js: maze-0d8429ec5e9f6ced42d17f1ad3d7b9b9.js
 sphere.js: sphere-71a4248e8fd43be83b13af2f6fa623c0.js
