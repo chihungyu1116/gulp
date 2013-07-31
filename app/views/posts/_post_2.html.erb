@@ -23,7 +23,7 @@
 		<li>
 			<p>Assume we have the following css setting</p>
 			<pre>
-<code lang="css">
+<code lang="css" class='prettyprint'>
 &lt;style&gt;
   .container-1 {
     position:absolute;
@@ -65,7 +65,7 @@
 		<li>
 			<p>Assume we have the following set up</p>
 			<pre>
-<code lang="css">
+<code lang="css" class='prettyprint'>
 &lt;style&gt;
   .child-container {
     position:absolute;
@@ -85,7 +85,7 @@
   }
 &lt;style&gt;
 </code>
-<code lang="html">
+<code lang="html" class='prettyprint'>
 &lt;html&gt;
     &lt;div class="container-2"&gt;
       &lt;div class="container-1"&gt;&lt;/div&gt;
@@ -98,7 +98,7 @@
 			<h2 class="point-title">Position relative and absolute?</h2>
 			<p>Given the following CSS and HTML</p>
 			<pre>
-<code lang="css">
+<code lang="css" class='prettyprint'>
 &lt;style&gt;
   .container-1 {
     position:absolute;
@@ -125,7 +125,7 @@
   }
 &lt;style&gt;
 </code>
-<code lang="html">
+<code lang="html" class='prettyprint'>
 &lt;html&gt;
     &lt;div class="container-1"&gt;
     &lt;div class="container-2"&gt;
@@ -144,7 +144,7 @@
 		<li>
 			<p>What if we switch the order of container-2 with container-3?</p>
 			<pre>
-<code lang="html">
+<code lang="html" class='prettyprint'>
 &lt;html&gt;
     &lt;div class="container-1"&gt;
     &lt;div class="container-3"&gt;
@@ -161,3 +161,9 @@
 		</li>
 </ol>
 <div class="post-end">(end)</div>
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'prettify' %>
+    <script type='text/javascript'>
+     prettyPrint();
+    </script>
+<% end %>

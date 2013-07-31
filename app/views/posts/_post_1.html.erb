@@ -3,7 +3,7 @@
 		<li>
 			<p>Assuming we have the following setup</p>
 			<pre>
-<code lang="javascript">
+<code lang="javascript" class='prettyprint'>
 var arr=[1,2,3,4,5,6,7,8,9,10],
     x;
 for(x = 0; x < arr.length; x++){
@@ -16,7 +16,7 @@ for(x = 0; x < arr.length; x++){
 		<li>
 		<p>Solution 1: use <strong>"reduce"</strong></p>
 			<pre>
-<code lang="javascript">
+<code lang="javascript" class='prettyprint'>
 arr = arr.reduce(function(prev,cur){
   return prev.concat(cur);
 },[]);
@@ -26,7 +26,7 @@ arr = arr.reduce(function(prev,cur){
 		<li>
 			<p>Solution 2: <strong>"filter"</strong></p>
 			<pre>
-<code lang="javascript">
+<code lang="javascript" class='prettyprint'>
 arr = arr.filter(function(cur){
   if(cur) return cur;
 });
@@ -36,7 +36,7 @@ arr = arr.filter(function(cur){
 		<li>
 			<p>Solution 3: use <strong>"splice"</strong></p>
 			<pre>
-<code lang="javascript">
+<code lang="javascript" class='prettyprint'>
 for (x = arr.length; x--;) {
   if (arr[x] === undefined) {
     arr.splice(x, 1);
@@ -48,7 +48,7 @@ for (x = arr.length; x--;) {
 	<li>
 		<p>The first two solution using ECMAScript 5 specification helpers are very elegant but carry huge overhead <a href="http://jsperf.com/core-javascript-perfromance" target="_blank" class="link-external">jsperf bench mark result.</a> The third solution using the combination of normal for loop and splice is the winner in terms of performance, but <span class="t-warning">be very careful of how you write the loop.</span> Due to <strong>"splice"</strong> actually removes an element from the array on the run time, if loop is written this way.</p>
 		<pre>
-<code>
+<code class='prettyprint'>
 for (x = 0; x < arr.length; x++;) {
   if (arr[x] === undefined) {
     arr.splice(x, 1);
@@ -60,3 +60,9 @@ for (x = 0; x < arr.length; x++;) {
 	</li>
 </ol>
 <div class="post-end">(end)</div>
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'prettify' %>
+    <script type='text/javascript'>
+     prettyPrint();
+    </script>
+<% end %>

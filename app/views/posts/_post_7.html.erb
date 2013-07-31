@@ -9,7 +9,7 @@
 		<h2 class="point-title">Check if Phone Number (Integer) is 10 digits</h2>
 		<p>Assume the value we get is an Integer</p>
 		<pre>
-<code lang="javascript"> 
+<code lang="javascript" class='prettyprint'> 
   var phone_number = 1234567890;  
   var if_10_digits = false;
   // to check if the phone number is 10 digits we can 
@@ -38,7 +38,7 @@
 		<h2 class="point-title">Bitwise Integer Swap</h2>
 		<p>Assume we have the following setting</p>
 		<pre>
-<code lang="javascript"> 
+<code lang="javascript" class='prettyprint'> 
   var x = 10;
   var y = 20;
 
@@ -68,7 +68,7 @@
 		<h2 class="point-title">Bitwise Mutiplication for multiple of 2</h2>
 		<p>Assume we have the following setting</p>
 		<pre>
-<code lang="javascript"> 
+<code lang="javascript" class='prettyprint'> 
 
   // when multiple number with value of multiple of 2
   // we can
@@ -101,3 +101,9 @@
 	</li>
 </ol>
 <div class="post-end">(end)</div>
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'prettify' %>
+    <script type='text/javascript'>
+     prettyPrint();
+    </script>
+<% end %>

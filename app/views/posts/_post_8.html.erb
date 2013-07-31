@@ -17,7 +17,7 @@
 		<p>How to do a perfect vertical align of text or anything is a challenge to new developer, one way to do it is to use <span class="t-warning">line-height</span> where we align the line-height of the text equal to the container's <span class="t-warning">height</span>.
 		<p>Assume the text is inline a container of <span class="t-warning">height 100px</span><p>
 	<pre>
-<code lang="css">
+<code lang="css" class='prettyprint'>
 &lt;style&gt;
   .container {
     height:100px;
@@ -46,7 +46,7 @@
 			
 		<p>This is a new way I found for vertical aligning things in the container that has an unknown height  <span class="t-warning">after</span> or <span class="t-warning">before</span>. (container-2's <span class="t-warning">height</span> can be anything!)</p>
 		<pre>
-<code lang="css">
+<code lang="css" class='prettyprint'>
 &lt;style&gt;
   .container-2 {
     height:100px;
@@ -71,3 +71,10 @@
 		</div>
 		<p>Now you know how to vertical align like a ninja.</p>
 		<div class="post-end">(end)</div>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'prettify' %>
+    <script type='text/javascript'>
+     prettyPrint();
+    </script>
+<% end %>

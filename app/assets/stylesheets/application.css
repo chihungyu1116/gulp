@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require_tree ./global
  */
 
 html,body{height:100%; margin:0; padding:0;}
@@ -17,7 +17,7 @@ body {ont-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px
 a {cursor:pointer; text-decoration:none;}
 p {line-height:1.4;}
 pre {margin:0 0 20px;}
-pre code {display:block; padding:0 30px 18px; border: 2px solid #eee; font-size:14px; color:#cecece; background:#3b3b3b; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
+pre code {display:block; padding:0 30px 18px; border: 2px solid #eee; font-size:14px; color:#cecece; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;}
 strong {font-weight:bold; text-transform:uppercase; background:#ffb;}
 /*a*/
 
