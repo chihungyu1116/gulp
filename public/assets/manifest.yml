@@ -15,6 +15,8 @@ maze.js: maze-0d8429ec5e9f6ced42d17f1ad3d7b9b9.js
 maze/index.js: maze-0d8429ec5e9f6ced42d17f1ad3d7b9b9.js
 prettify.js: prettify-3f518239bdc11b38355259753b47633b.js
 prettify/index.js: prettify-3f518239bdc11b38355259753b47633b.js
+profolio.js: profolio-f00251f452c48102b58e406cc891259e.js
+profolio/index.js: profolio-f00251f452c48102b58e406cc891259e.js
 sphere.js: sphere-71a4248e8fd43be83b13af2f6fa623c0.js
 sphere/index.js: sphere-71a4248e8fd43be83b13af2f6fa623c0.js
 application.css: application-d11f5962e9abb3f5420d8f00102fde47.css
