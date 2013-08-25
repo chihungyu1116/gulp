@@ -47,7 +47,7 @@ Gulp::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += [ 'maze.js', 'facebook.js', 'layoutday.js', 'sphere.js', 'life.js', 'prettify.js', 'profolio.js']
+  config.assets.precompile += [ 'maze.js', 'facebook.js', 'layoutday.js', 'sphere.js', 'life.js', 'prettify.js', 'profolio.js', 'emission.js']
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

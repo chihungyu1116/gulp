@@ -1,0 +1,23 @@
+<% content_for :style do %>
+	<style>
+    .btn {
+      cursor:pointer;
+      padding:10px 15px;
+      margin:10px 10px 0 3px;
+    }
+    .col {float:left;}
+    .emission {background:#000;}
+	</style>
+<% end %>	
+<h1 class="post-title">Emission on Canvas</h1>
+
+<canvas id='emission' class='emission'></canvas>
+
+<div class="post-end">(end)</div>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'vendor/underscore','vendor/backbone','emission' %>
+    <script>
+    
+    </script>
+<% end %>
