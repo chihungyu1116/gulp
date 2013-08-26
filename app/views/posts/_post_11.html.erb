@@ -1,0 +1,77 @@
+<% content_for :style do %>
+  <style>
+  </style>
+<% end %> 
+<h1 class="post-title">Javascript Factory Pattern</h1>
+<pre>
+<code lang="javascript" class='prettyprint'> 
+  
+var Node = (function(){
+  var self = function(id){
+    this.id = id;
+    this.value = null;
+    this.parent = null;
+    this.children = [];
+    this.addChild = function(child){
+      this.children.push(child)
+    }
+    this.removeChild = function(child_id){
+      var child, children, index;
+      children = this.children;
+      for(index = children.length; index--;){
+        child = children[index];
+        if(child.id === child_id){
+          children.splice(index,1);
+          break;
+        }
+      }
+    }
+  },
+  id_counter = -1;
+  return {
+    getNew : function(){
+      id_counter++;
+      return new self(id_counter);
+    }
+  }
+}());
+</code>
+</pre>
+
+<div class="post-end">(end)</div>
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'prettify' %>
+    <script type='text/javascript'>
+    prettyPrint();
+
+    var Node = (function(){
+      var self = function(id){
+        this.id = id;
+        this.value = null;
+        this.parent = null;
+        this.children = [];
+        this.addChild = function(child){
+          this.children.push(child)
+        }
+        this.removeChild = function(child_id){
+          var child, children, index;
+          children = this.children;
+          for(index = children.length; index--;){
+            child = children[index];
+            if(child.id === child_id){
+              children.splice(index,1);
+              break;
+            }
+          }
+        }
+      },
+      id_counter = -1;
+      return {
+        getNew : function(){
+          id_counter++;
+          return new self(id_counter);
+        }
+      }
+    }());
+    </script>
+<% end %>
