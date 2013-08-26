@@ -5,73 +5,97 @@
 <h1 class="post-title">Javascript Factory Pattern</h1>
 <pre>
 <code lang="javascript" class='prettyprint'> 
-  
-var Node = (function(){
-  var self = function(id){
-    this.id = id;
-    this.value = null;
-    this.parent = null;
-    this.children = [];
-    this.addChild = function(child){
-      this.children.push(child)
-    }
-    this.removeChild = function(child_id){
-      var child, children, index;
-      children = this.children;
-      for(index = children.length; index--;){
-        child = children[index];
-        if(child.id === child_id){
-          children.splice(index,1);
-          break;
-        }
+var Node = (function(){ // Node is used to act as the interface for creating a new Node
+var self = function(id){
+  this.id = id;
+  this.value = null;
+  this.parent = null;
+  this.children = [];
+  this.addChild = function(child){
+    this.children.push(child)
+  }
+  this.removeChild = function(target_id){
+    var child, child_id, 
+        children = this.children, 
+        index;
+    for(index = children.length; index--;){
+      child = children[index];
+      child_id = child.id;
+      if(child_id === target_id){
+        children.splice(index,1);
+        delete settings.node_id_arr[child_id];
+        break;
       }
     }
-  },
-  id_counter = -1;
-  return {
-    getNew : function(){
-      id_counter++;
-      return new self(id_counter);
-    }
   }
+},
+settings = {
+  node_id_current : -1, // Used to keep track of current id
+  node_id_arr : [] // Used to keep track of the current Node Id being used
+}
+return {
+  getNew : function(){ // Used to create a new Node
+    settings.node_id_current++;
+    settings.node_id_arr.push(settings.node_id_current);
+    return new self(settings.node_id_current);
+  },
+  getNodeIdArr : function(){
+    return settings.node_id_arr.slice(); // Return a complete new set of array
+  }
+}
 }());
+
+// Create a new Node in the console by typing Node.getNew() in the browser console;
+// See a list of Node being used by typing Node.getNodeIdArr() in the browser console;
 </code>
 </pre>
 
 <div class="post-end">(end)</div>
 <% content_for :scripts do %>
-    <%= javascript_include_tag 'prettify' %>
-    <script type='text/javascript'>
-    prettyPrint();
+  <%= javascript_include_tag 'prettify' %>
+  <script type='text/javascript'>
+  prettyPrint();
 
-    var Node = (function(){
-      var self = function(id){
-        this.id = id;
-        this.value = null;
-        this.parent = null;
-        this.children = [];
-        this.addChild = function(child){
-          this.children.push(child)
-        }
-        this.removeChild = function(child_id){
-          var child, children, index;
-          children = this.children;
-          for(index = children.length; index--;){
-            child = children[index];
-            if(child.id === child_id){
-              children.splice(index,1);
-              break;
-            }
+  var Node = (function(){
+    var self = function(id){
+      this.id = id;
+      this.value = null;
+      this.parent = null;
+      this.children = [];
+      this.addChild = function(child){
+        this.children.push(child)
+      }
+      this.removeChild = function(target_id){
+        var child, child_id, 
+            children = this.children, 
+            index;
+        for(index = children.length; index--;){
+          child = children[index];
+          child_id = child.id;
+          if(child_id === target_id){
+            children.splice(index,1);
+            delete settings.node_id_arr[child_id];
+            break;
           }
         }
-      },
-      id_counter = -1;
-      return {
-        getNew : function(){
-          id_counter++;
-          return new self(id_counter);
-        }
       }
-    }());
+    },
+    settings = {
+      node_id_current : -1,
+      node_id_arr : []
+    }
+    return {
+      getNew : function(){
+        settings.node_id_current++;
+        settings.node_id_arr.push(settings.node_id_current);
+        return new self(settings.node_id_current);
+      },
+      getNodeIdArr : function(){
+        return settings.node_id_arr.slice();
+      }
+    }
+  }());
+
+  window.Node = Node;
     </script>
 <% end %>
