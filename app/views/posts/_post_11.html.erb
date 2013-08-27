@@ -6,43 +6,43 @@
 <pre>
 <code lang="javascript" class='prettyprint'> 
 var Node = (function(){ // Node is used to act as the interface for creating a new Node
-var self = function(id){
-  this.id = id;
-  this.value = null;
-  this.parent = null;
-  this.children = [];
-  this.addChild = function(child){
-    this.children.push(child)
-  }
-  this.removeChild = function(target_id){
-    var child, child_id, 
-        children = this.children, 
-        index;
-    for(index = children.length; index--;){
-      child = children[index];
-      child_id = child.id;
-      if(child_id === target_id){
-        children.splice(index,1);
-        delete settings.node_id_arr[child_id];
-        break;
+  var self = function(id){
+    this.id = id;
+    this.value = null;
+    this.parent = null;
+    this.children = [];
+    this.addChild = function(child){
+      this.children.push(child)
+    }
+    this.removeChild = function(target_id){
+      var child, child_id, 
+          children = this.children, 
+          index;
+      for(index = children.length; index--;){
+        child = children[index];
+        child_id = child.id;
+        if(child_id === target_id){
+          children.splice(index,1);
+          delete settings.node_id_arr[child_id];
+          break;
+        }
       }
     }
-  }
-},
-settings = {
-  node_id_current : -1, // Used to keep track of current id
-  node_id_arr : [] // Used to keep track of the current Node Id being used
-}
-return {
-  getNew : function(){ // Used to create a new Node
-    settings.node_id_current++;
-    settings.node_id_arr.push(settings.node_id_current);
-    return new self(settings.node_id_current);
   },
-  getNodeIdArr : function(){
-    return settings.node_id_arr.slice(); // Return a complete new set of array
+  settings = {
+    node_id_current : -1, // Used to keep track of current id
+    node_id_arr : [] // Used to keep track of the current Node Id being used
   }
-}
+  return {
+    getNew : function(){ // Used to create a new Node
+      settings.node_id_current++;
+      settings.node_id_arr.push(settings.node_id_current);
+      return new self(settings.node_id_current);
+    },
+    getNodeIdArr : function(){
+      return settings.node_id_arr.slice(); // Return a complete new set of array
+    }
+  }
 }());
 
 // Create a new Node in the console by typing Node.getNew() in the browser console;
