@@ -1,0 +1,75 @@
+<% content_for :style do %>
+	<style>
+		.crazy-container {position:relative; top:50%; width:200px; height:200px; margin:-100px auto 0; background:#fff; text-align:center;}
+		.overlay {position:fixed; display:none; width:100%; top:0; left:0; background:#000;}
+		.overlay.active {display:block;}
+		.text {padding-top:40px; font-size:18px;}
+	</style>
+<% end %>
+<%= render partial: 'share/app_blog_title', locals: { title:'About' }  %>
+	
+<h1 class="post-title">Vertical Align Popup On Overlay With Only CSS Like a Ninja</h1>
+
+<ol>
+	<li>
+		<p>
+			Before I came up with the solution to vertical aligning a popup box in a overlay, I had to use Javascript for aligning it to the center.
+			The solution is to position the popup with relative (for easy horizontal centering, margin-left: auto, margin-right: auto), then set it to top 50% by doing that it set the tip of the container to the vertical center position. Then we set the margin-top to the negative 1/2 container height. In this example the margin top will get set to -100px.
+			Yes, the restriction is that you have to know the height of the container and the overlay still requires Javascript. If the height of the container is unknown but is fixed once it finishes rendering. You can set it's margin-top manually with Javascript. It still saves a lot of computation power from eliminating the listener for detecting window resize and recalculate the new vertical center position via Javascript.
+		</p>
+	<pre>
+<code lang="css" class='prettyprint'>
+&lt;style&gt;
+  .crazy-container {
+  	position:relative;
+  	top:-50px;
+  	width:200px;
+    height:200px;
+    margin:-100px auto 0;
+   	background:#fff;
+  }
+&lt;style&gt;
+</code>
+	</pre>
+
+
+	<a class='btn' id='try-me'>Try Me</a>
+
+	<div class="post-end">(end)</div>
+
+
+<% content_for :overlay do %>
+<div id='crazy-container' class='crazy-container'>
+	<div class='text'>Now try resizing the window</div>
+	<div class='text'>Or click me to close it</div>
+</div>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'prettify' %>
+    <script type='text/javascript'>
+     prettyPrint();
+     jQuery(function($){
+     	var $btn = $('#try-me'),
+     		$container = $('#crazy-container');
+
+		function getHeight(){
+ 			return $(window).height();
+ 		}
+ 		function setHeight(){
+ 			$('.overlay').css('height',getHeight());
+ 		}
+ 		$btn.click(function(){
+     		setHeight();
+     		$('.overlay').addClass('active');
+     		$(window).resize(function(){
+     			setHeight();
+     		})
+     	});
+
+ 		$container.click(function(){
+ 			$('.overlay').removeClass('active');
+ 		})
+	});
+    </script>
+<% end %>
