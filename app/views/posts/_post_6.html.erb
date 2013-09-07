@@ -9,20 +9,7 @@
 
 	.control_panel .cool_btn {margin:0 15px 80px 0; cursor:pointer; text-align:center; border:1px solid #777; width:75px; padding:10px 0;}
 
-	#sphere_container.active {animation: rotate 40s linear infinite; -moz-animation: rotate 40s linear infinite; -webkit-animation: rotate 40s linear infinite;}
-
-	@keyframes rotate {
-		0% {transform:rotateX(0deg) rotateY(0deg);}
-		10% {transform:rotateX(105deg) rotateY(75deg);}
-		20% {transform:rotateX(55deg) rotateY(25deg);}
-		30% {transform:rotateX(170deg) rotateY(80deg);}
-		40% {transform:rotateX(220deg) rotateY(180deg);}
-		50% {transform:rotateX(290deg) rotateY(280deg);}
-		60% {transform:rotateX(55deg) rotateY(200deg);}
-		70% {transform:rotateX(55deg) rotateY(95deg);}
-		80% {transform:rotateX(60deg) rotateY(50deg);}
-		100% {transform:rotateX(0deg) rotateY(0deg);}
-	}
+	#sphere_container.active {-moz-animation: rotate 40s linear infinite; -webkit-animation: rotate 40s linear infinite; animation: rotate 40s linear infinite;}
 
 	@-moz-keyframes rotate {
 		0% {-moz-transform:rotateX(0deg) rotateY(0deg);}
@@ -48,6 +35,18 @@
 		70% {-webkit-transform:rotateX(55deg) rotateY(95deg);}
 		80% {-webkit-transform:rotateX(60deg) rotateY(50deg);}
 		100% {-webkit-transform:rotateX(0deg) rotateY(0deg);}
+	}
+	@keyframes rotate {
+		0% {transform:rotateX(0deg) rotateY(0deg);}
+		10% {transform:rotateX(105deg) rotateY(75deg);}
+		20% {transform:rotateX(55deg) rotateY(25deg);}
+		30% {transform:rotateX(170deg) rotateY(80deg);}
+		40% {transform:rotateX(220deg) rotateY(180deg);}
+		50% {transform:rotateX(290deg) rotateY(280deg);}
+		60% {transform:rotateX(55deg) rotateY(200deg);}
+		70% {transform:rotateX(55deg) rotateY(95deg);}
+		80% {transform:rotateX(60deg) rotateY(50deg);}
+		100% {transform:rotateX(0deg) rotateY(0deg);}
 	}
 	</style>
 <% end %>
