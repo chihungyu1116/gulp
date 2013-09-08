@@ -1,0 +1,102 @@
+<% content_for :style do %>
+  <style>
+  	.maze {
+  		display:inline-block;
+  	}
+  	.cell {
+  		float:left;
+  		width:15px;
+  		height:15px;
+  		background:#111;
+  		border-color:111;
+  		border-style:solid;
+  		-webkit-box-sizing:border-box;
+  		-moz-box-sizing:border-box;
+  		box-sizing:border-box;
+  	}
+  	.cell_top {
+  		background:#fff;
+  		border-width:1px 0 0 0;
+  	}
+  	.cell_bottom {
+  		background:#fff;
+  		border-width:0 0 1px 0;
+  	}
+  	.cell_left {
+  		background:#fff;
+  		border-width:0 0 0 1px;
+  	}
+  	.cell_right {
+  		background:#fff;
+  		border-width:0 1px 0 0;
+  	}
+  	.cell_top_right {
+  		background:#fff;
+  		border-width:1px 1px 0 0;
+  	}
+  	.cell_top_left {
+  		background:#fff;
+  		border-width:1px 0 0 1px;
+  	}
+  	.cell_top_bottom {
+  		background:#fff;
+  		border-width:1px 0;
+  	}
+  	.cell_top_bottom_left {
+  		background:#fff;
+  		border-width:1px 0 1px 1px;
+  	}
+  	.cell_top_right_left {
+  		background:#fff;
+  		border-width:1px 1px 0 1px;
+  	}
+  	.cell_top_right_bottom {
+  		background:#fff;
+  		border-width:1px 1px 1px 0;
+  	}
+  	.cell_right_bottom_left {
+  		background:#fff;
+  		border-width:0 1px 1px 1px;
+  	}
+  	.cell_right_left {
+  		background:#fff;
+  		border-width:0 1px;
+  	}
+  	.cell_right_bottom {
+  		background:#fff;
+  		border-width:0 1px 1px 0;
+  	}
+  	.cell_bottom_left{
+  		background:#fff;
+  		border-width:0 0 1px 1px;
+  	}
+  	.cell_begin {
+  		background: green;
+  		border-left:0;
+  		border-top:0;
+  	}
+  	.cell_ {
+  		border:0;
+  		background:#fff;
+  	}
+  	.cell_end {
+  		background:red;
+  		border:1px;
+  	}
+  </style>
+<% end %> 
+<h1 class="post-title">Random Maze Generator Via DFS (Depth First Search)</h1>
+
+<h2>Refresh to Create a new maze</h2>
+<div id='maze' class='maze clearfix'></div>
+
+
+<div class="post-end">(end)</div>
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'vendor/underscore','vendor/backbone','random_maze_generator_via_dfs' %>
+  <script type='text/javascript'>
+  
+  </script>
+<% end %>
+
+
